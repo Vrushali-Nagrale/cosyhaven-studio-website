@@ -177,6 +177,8 @@ export default function App() {
               <button className="button line" onClick={() => setFormOpen(true)}>Start a project</button>
             </div>
           </div>
+          <div className="hero-rail hero-rail-left"><span>01</span><i /><span>08</span></div>
+          <div className="hero-rail hero-rail-right">Architecture<br />Interiors<br />Furniture<br />Execution</div>
           <button className="scroll-note" onClick={() => scrollTo('studio')}>
             <span className="scroll-text">Scroll to explore</span>
             <span className="scroll-arrow"><span /></span>
