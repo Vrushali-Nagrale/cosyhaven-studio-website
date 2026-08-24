@@ -16,11 +16,11 @@ const projects: Project[] = [
 ]
 
 const services = [
-  { title: 'Architecture & Interior Execution', desc: 'Designing and executing interiors and exteriors from concept to completion.', image: '/project9.jpeg' },
-  { title: 'Residential Interiors', desc: 'Creating elegant, comfortable, and functional spaces made for everyday living.', image: '/project11.jpeg' },
-  { title: 'Furniture Manufacturing', desc: 'Crafting custom furniture with quality materials and precise workmanship.', image: '/project12.jpeg' },
-  { title: 'Turnkey Projects', desc: 'Managing everything from design and civil work to finishing — under one roof.', image: '/project13.jpeg' },
-  { title: 'Customized Solutions', desc: 'Tailored spaces and furniture designed around your needs and style.', image: '/project14.jpeg' },
+  { title: 'Architecture', desc: 'Shaping enduring structures with a considered relationship between light, material, and place.', image: '/project9.jpeg' },
+  { title: 'Interior Design', desc: 'Creating elegant, comfortable, and functional spaces made for everyday living.', image: '/project11.jpeg' },
+  { title: 'Furniture', desc: 'Crafting custom furniture with quality materials and precise workmanship.', image: '/project12.jpeg' },
+  { title: 'Manufacturing', desc: 'Bringing precision, quality, and a refined finish together in our own workshop.', image: '/project13.jpeg' },
+  { title: 'Turnkey Execution', desc: 'Managing every detail from design and civil work to the final finishing touch.', image: '/project14.jpeg' },
 ]
 
 const machines = [
