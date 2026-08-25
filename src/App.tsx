@@ -189,10 +189,10 @@ export default function App() {
         <section id="studio" className="about section" ref={aboutReveal.ref}>
           <div className={`about-visual ${aboutReveal.visible ? 'is-visible' : ''}`}>
             <div className="about-image-main">
-              <img src="/about studio.jpeg" alt="Cozyhaven Studio workspace" loading="lazy" />
+              <img src="/project 7.jpeg" alt="Cozyhaven Studio interior project" loading="lazy" />
             </div>
             <div className="about-image-sub">
-              <img src="/project15.jpeg" alt="Interior detail" loading="lazy" />
+              <img src="/project 4.jpeg" alt="Interior design detail" loading="lazy" />
             </div>
             <div className="about-image-label">The Studio</div>
           </div>
