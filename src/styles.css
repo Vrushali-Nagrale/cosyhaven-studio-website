@@ -189,7 +189,7 @@ h2 em { font: 300 italic 1.05em var(--serif); color: var(--gold); }
 .about-image-main img { width: 100%; height: 100%; object-fit: cover; object-position: center; filter: brightness(0.82) contrast(1.05); transform: scale(1.12); transition: transform 2s var(--ease-expo); }
 .about-visual.is-visible .about-image-main img { transform: scale(1); }
 .about-image-sub {
-  position: absolute; bottom: -32px; left: 24px; width: 38%; aspect-ratio: 3/4;
+  position: absolute; bottom: -24px; left: 0; width: 38%; aspect-ratio: 3/4;
   overflow: hidden; border: 1px solid var(--line);
   clip-path: inset(100% 0 0 0);
   transition: clip-path 1.3s var(--ease-expo) 0.5s;
@@ -459,8 +459,8 @@ select { cursor: pointer; }
   .section { padding: 90px 24px; }
   .about, .founder, .services, .manufacturing { grid-template-columns: 1fr; gap: 50px; }
   .about-visual { margin-left: 0; width: 100%; }
-  .about-image-main { aspect-ratio: 3/2; }
-  .about-image-sub { width: 35%; bottom: -20px; left: 16px; }
+  .about-image-main { aspect-ratio: 4/5; }
+  .about-image-sub { width: 36%; bottom: -20px; left: 0; }
   .service-row { grid-template-columns: 40px 1fr 24px; gap: 14px; }
   .service-image { display: none; }
   .service-body p { font-size: 11px; }
@@ -493,8 +493,8 @@ select { cursor: pointer; }
   .hero-copy { font-size: 10px; line-height: 1.8; letter-spacing: 0.15em; }
   .actions { flex-direction: column; align-items: stretch; width: 100%; }
   .button { text-align: center; justify-content: center; }
-  .about-image-main { aspect-ratio: 4/3; }
-  .about-image-sub { width: 38%; bottom: -16px; left: 12px; }
+  .about-image-main { aspect-ratio: 4/5; }
+  .about-image-sub { width: 40%; bottom: -16px; left: 0; }
   .stat-grid { grid-template-columns: 1fr; }
   .stat-card { border: 0; padding: 0 0 24px; border-bottom: 1px solid var(--line); }
   .stat-card:nth-child(3) { border-bottom: 1px solid var(--line); }
