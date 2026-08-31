@@ -62,18 +62,30 @@ const featuredProjects: Project[] = [
   { name: 'Life Republic R7', place: 'Pune', image: '/life republic R7.jpeg' },
   { name: 'Aloha Wakad', place: 'Wakad', image: '/Aloha wakad.jpeg' },
   { name: 'Stellar Homes', place: 'Hinjewadi', image: '/stellar homes , hinjewadi.jpeg' },
+  { name: 'ANP Memento', place: 'Wakad', image: '/project5.jpeg' },
+  { name: 'Kumar Presidency', place: 'Koregaon Park', image: '/project8.jpeg' },
+  { name: 'Park Titan', place: 'Wakad', image: '/project13.jpeg' },
+  { name: 'The Address', place: 'Baner', image: '/project15.jpeg' },
+  { name: 'Sukhwani Kingsley', place: 'Wakad', image: '/project 4.jpeg' },
+  { name: 'Sukhwani Skylines', place: 'Wakad', image: '/project 7.jpeg' },
+  { name: 'Park 59', place: 'Pimpri', image: '/project.jpeg' },
+  { name: 'Ganga Legend', place: 'Bavdhan', image: '/project 18.jpeg' },
+  { name: 'Runwal The Central Park', place: 'Pimpri-Chinchwad', image: '/project 19.jpeg' },
 ]
 
-const moreProjects: Project[] = [
-  { name: 'ANP Memento', place: 'Wakad' },
-  { name: 'Kumar Presidency', place: 'Koregaon Park' },
-  { name: 'Park Titan', place: 'Wakad' },
-  { name: 'The Address', place: 'Baner' },
-  { name: 'Sukhwani Kingsley', place: 'Wakad' },
-  { name: 'Sukhwani Skylines', place: 'Wakad' },
-  { name: 'Park 59', place: 'Pimpri' },
-  { name: 'Ganga Legend', place: 'Bavdhan' },
-  { name: 'Runwal The Central Park', place: 'Pimpri-Chinchwad' },
+const journalEntries = [
+  { num: '01', category: 'Design Philosophy', date: '2026', title: 'The Art of Living', excerpt: 'How thoughtful design transforms a house into a home — where every surface, shadow, and silhouette serves a purpose.', image: '/about studio.jpeg' },
+  { num: '02', category: 'Process', date: '2026', title: 'Inside Our Design Process', excerpt: 'From first sketch to final handover, a look at the methodology behind every CozyHaven project.', image: '/WhatsApp Image 2026-08-29 at 4.59.48 PM.jpeg' },
+  { num: '03', category: 'Material & Craft', date: '2026', title: 'Material, Light & Form', excerpt: 'The interplay of natural materials, ambient light, and architectural form that defines luxury interiors.', image: '/WhatsApp Image 2026-08-29 at 5.05.55 PM.jpeg' },
+  { num: '04', category: 'Detail', date: '2026', title: 'Creating Luxury Through Detail', excerpt: 'Why true luxury lives in the details — the joinery, the finish, the moment of touch.', image: '/projct 10.jpeg' },
+]
+
+const scaleLevels = [
+  { num: '01', label: 'Room', desc: 'Single spaces designed with intention' },
+  { num: '02', label: 'Apartment', desc: 'Complete homes, fully realized' },
+  { num: '03', label: 'Penthouse', desc: 'Elevated living, refined to perfection' },
+  { num: '04', label: 'Villa', desc: 'Architectural homes with character' },
+  { num: '05', label: 'Luxury Residence', desc: 'Bespoke estates of uncompromising quality' },
 ]
 
 const machines = [
@@ -85,29 +97,19 @@ const machines = [
 
 const projectTypes = ['Residential Interior', 'Commercial Interior', 'Architecture', 'Furniture', 'Turnkey Project', 'Other']
 
+const uniqueItems = [
+  { num: '01', title: 'Detail Driven', desc: 'Every junction, every shadow, every material — considered.' },
+  { num: '02', title: 'Personalized Design', desc: 'No two projects repeat. Each space is shaped around its people.' },
+  { num: '03', title: 'Functional Luxury', desc: 'Beauty that works as well as it looks — never decorative for its own sake.' },
+  { num: '04', title: 'End-to-End Execution', desc: 'Design, manufacturing, and site execution under one roof.' },
+  { num: '05', title: 'Crafted For You', desc: 'Built by hand, delivered with care, made to outlast trends.' },
+]
+
 function RevealText({ children, className = '', delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
   const { ref, visible } = useReveal<HTMLDivElement>(0.2)
   return (
     <div ref={ref} className={`reveal-wrap ${visible ? 'is-visible' : ''}`} style={{ transitionDelay: `${delay}ms` }}>
       <div className={`reveal-inner ${className}`}>{children}</div>
-    </div>
-  )
-}
-
-function StatItem({ stat, index, visible }: { stat: { value: string; label: string; detail?: string; subLabel?: string; countTo?: number; suffix?: string }; index: number; visible: boolean }) {
-  const count = useCountUp(stat.countTo || 0, visible && stat.countTo !== undefined)
-  return (
-    <div className="stat-card" style={{ transitionDelay: `${index * 0.12}s` }}>
-      <div className="stat-card-inner">
-        <span className="stat-label">{`0${index + 1}`}</span>
-        <div className="stat-heading">{stat.label}</div>
-        {stat.detail && <div className="stat-detail">{stat.detail}</div>}
-        <div className="stat-value">
-          {stat.countTo !== undefined ? <>{count}<em>{stat.suffix !== undefined ? stat.suffix : '+'}</em></> : stat.value}
-        </div>
-        <div className="stat-divider" />
-        <span className="stat-text">{stat.subLabel || stat.label}</span>
-      </div>
     </div>
   )
 }
@@ -137,7 +139,7 @@ export default function App() {
   const statementReveal = useReveal<HTMLDivElement>(0.2)
   const founderReveal = useReveal<HTMLDivElement>(0.15)
   const workReveal = useReveal<HTMLDivElement>(0.1)
-  const moreProjectsReveal = useReveal<HTMLDivElement>(0.15)
+  const journalReveal = useReveal<HTMLDivElement>(0.15)
   const residentialReveal = useReveal<HTMLDivElement>(0.2)
   const mfgReveal = useReveal<HTMLDivElement>(0.1)
   const contactReveal = useReveal<HTMLDivElement>(0.15)
@@ -240,7 +242,7 @@ export default function App() {
               <button className="button line" onClick={() => setFormOpen(true)}>Start a project</button>
             </div>
           </div>
-          <div className="hero-rail hero-rail-left"><span>01</span><i /><span>14</span></div>
+          <div className="hero-rail hero-rail-left"><span>01</span><i /><span>23</span></div>
           <div className="hero-rail hero-rail-right">Architecture<br />Interiors<br />Furniture<br />Execution</div>
           <button className="scroll-note" onClick={() => scrollTo('studio')}>
             <span className="scroll-text">Scroll to explore</span>
@@ -332,13 +334,17 @@ export default function App() {
           <div className="statement-bg-text">CRAFTSMANSHIP</div>
           <div className={`statement-inner ${statementReveal.visible ? 'is-visible' : ''}`}>
             <p className="eyebrow">WHAT MAKES US UNIQUE</p>
-            <h2>Craftsmanship is<br /><em>in the detail.</em></h2>
-            <div className="stat-grid">
-              <StatItem stat={{ label: 'Founded By', detail: 'BTS Furniture', value: '30', subLabel: 'Years of Experience', suffix: '', countTo: 30 }} index={0} visible={statementReveal.visible} />
-              <StatItem stat={{ label: 'Manufacturing', value: 'In-House', subLabel: 'Precision production' }} index={1} visible={statementReveal.visible} />
-              <StatItem stat={{ label: 'Execution', value: 'End-to-End', subLabel: 'Complete project delivery' }} index={2} visible={statementReveal.visible} />
-              <StatItem stat={{ label: 'Scale', value: 'Built for Scale', subLabel: 'Large & Custom Projects' }} index={3} visible={statementReveal.visible} />
-              <StatItem stat={{ label: '3D & 2D', value: 'Visualisation', subLabel: 'Design clarity' }} index={4} visible={statementReveal.visible} />
+            <h2>What makes us<br /><em>unique.</em></h2>
+            <div className="unique-grid">
+              {uniqueItems.map((item, index) => (
+                <div className="unique-item" key={item.num} style={{ transitionDelay: `${index * 0.1}s` }}>
+                  <span className="unique-num">{item.num}</span>
+                  <div className="unique-body">
+                    <h3>{item.title}</h3>
+                    <p>{item.desc}</p>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </section>
@@ -446,20 +452,29 @@ export default function App() {
           </div>
         </section>
 
-        {/* MORE PROJECTS */}
-        <section className="more-projects" ref={moreProjectsReveal.ref}>
-          <div className={`more-projects-inner ${moreProjectsReveal.visible ? 'is-visible' : ''}`}>
-            <p className="eyebrow">SELECTED PROJECTS</p>
-            <h2>More Projects</h2>
-            <div className="more-projects-list">
-              {moreProjects.map((project, index) => (
-                <div className="more-projects-item" key={project.name} style={{ transitionDelay: `${index * 0.06}s` }}>
-                  <span className="more-projects-num">{String(index + 1).padStart(2, '0')}</span>
-                  <div className="more-projects-content">
-                    <strong>{project.name}</strong>
-                    <small>{project.place}</small>
+        {/* JOURNAL */}
+        <section className="journal" ref={journalReveal.ref}>
+          <div className={`journal-inner ${journalReveal.visible ? 'is-visible' : ''}`}>
+            <div className="journal-header">
+              <p className="eyebrow">JOURNAL</p>
+              <h2>Notes on<br /><em>design & living.</em></h2>
+            </div>
+            <div className="journal-grid">
+              {journalEntries.map((entry, index) => (
+                <article className="journal-card" key={entry.num} style={{ transitionDelay: `${index * 0.12}s` }}>
+                  <div className="journal-card-image">
+                    <img src={entry.image} alt={entry.title} loading="lazy" />
                   </div>
-                </div>
+                  <div className="journal-card-body">
+                    <div className="journal-card-meta">
+                      <span className="journal-card-cat">{entry.category}</span>
+                      <span className="journal-card-date">{entry.date}</span>
+                    </div>
+                    <h3>{entry.title}</h3>
+                    <p>{entry.excerpt}</p>
+                    <span className="journal-card-link">Read →</span>
+                  </div>
+                </article>
               ))}
             </div>
           </div>
@@ -470,9 +485,19 @@ export default function App() {
           <div className="residential-scale-bg" />
           <div className="residential-scale-grid" />
           <div className={`residential-scale-inner ${residentialReveal.visible ? 'is-visible' : ''}`}>
+            <p className="eyebrow">RESIDENTIAL PROJECTS OF EVERY SCALE</p>
+            <h2 className="residential-scale-heading">From a single room<br /><em>to a complete residence.</em></h2>
             <p className="residential-scale-locations">Pune&nbsp;&nbsp;•&nbsp;&nbsp;Mumbai&nbsp;&nbsp;•&nbsp;&nbsp;Kolhapur&nbsp;&nbsp;•&nbsp;&nbsp;Solapur&nbsp;&nbsp;•&nbsp;&nbsp;Bengaluru&nbsp;&nbsp;•&nbsp;&nbsp;Hyderabad&nbsp;&nbsp;•&nbsp;&nbsp;Goa&nbsp;&nbsp;•&nbsp;&nbsp;+ Across India</p>
-            <h2 className="residential-scale-heading">2BHK <span className="residential-scale-arrow">→</span> 5BHK <span className="residential-scale-plus">+</span> Bungalows</h2>
-            <p className="residential-scale-sub">Residential projects of every scale</p>
+            <div className="scale-progression">
+              {scaleLevels.map((level, index) => (
+                <div className="scale-level" key={level.num} style={{ transitionDelay: `${index * 0.15}s` }}>
+                  <span className="scale-level-num">{level.num}</span>
+                  <h3 className="scale-level-label">{level.label}</h3>
+                  <p className="scale-level-desc">{level.desc}</p>
+                  {index < scaleLevels.length - 1 && <span className="scale-level-arrow">↓</span>}
+                </div>
+              ))}
+            </div>
           </div>
         </section>
 
