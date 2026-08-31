@@ -333,12 +333,14 @@ h2 em { font: 300 italic 1.05em var(--serif); color: var(--gold); }
 .founder-copy { opacity: 0; transform: translateY(30px); transition: opacity 1s var(--ease) 0.3s, transform 1s var(--ease) 0.3s; }
 .founder-copy.is-visible { opacity: 1; transform: translateY(0); }
 .founder-copy h2 { margin: 20px 0 8px; }
+.founder-copy h3 { font: 30px var(--display); margin-bottom: 4px; }
 .founder-copy p:not(.eyebrow) { color: var(--muted); max-width: 700px; }
 .founder-copy p:not(.eyebrow):not(.founder-role) { margin-bottom: 1rem; }
 .founder-role { color: var(--gold) !important; font: italic 22px var(--serif); margin-bottom: 16px; }
-.founder-profile-secondary { border-top: 1px solid var(--line); margin-top: 32px; padding: 28px 0 0 56px; position: relative; }
-.founder-profile-secondary h3 { font: 30px var(--display); margin-bottom: 4px; }
-.founder-profile-num { position: absolute; top: 30px; left: 0; font-size: 11px; color: var(--gold-dim); letter-spacing: 0.15em; }
+.founder-profile { position: relative; padding-left: 56px; }
+.founder-profile-num { position: absolute; top: 4px; left: 0; font-size: 11px; color: var(--gold-dim); letter-spacing: 0.15em; }
+.founder-divider { height: 1px; background: var(--line); margin: 32px 0; }
+.founder-profile-secondary { padding-top: 0; }
 .timeline { display: flex; gap: 50px; margin-top: 36px; border-top: 1px solid var(--line); padding-top: 24px; }
 .timeline span { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.12em; }
 .timeline b { display: block; font: 30px var(--display); color: var(--gold); margin-bottom: 6px; min-height: 36px; }
@@ -567,7 +569,7 @@ select { cursor: pointer; }
   .stat-card:nth-child(3) { border-bottom: 1px solid var(--line); }
   .mini-stats, .timeline { flex-direction: column; gap: 20px; }
   .founder-photo { width: min(62vw, 220px); margin: 0 auto; }
-  .founder-profile-secondary { padding-left: 0; }
+  .founder-profile { padding-left: 0; }
   .founder-profile-num { position: static; display: block; margin-bottom: 14px; }
   .founder-profile-secondary h3 { font-size: 26px; }
   .machine-grid { grid-template-columns: 1fr; }

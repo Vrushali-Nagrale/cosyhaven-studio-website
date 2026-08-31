@@ -243,7 +243,7 @@ export default function App() {
             <p className="eyebrow">01 · ABOUT THE STUDIO</p>
             <h2>Thoughtful spaces,<br /><em>made to last.</em></h2>
             <div className="rule" />
-            <p>Cosyhaven Studio is a design and execution studio creating thoughtful spaces that blend aesthetics, functionality, and craftsmanship.</p>
+            <p>CozyHaven Studio is a design and execution studio creating thoughtful spaces that blend aesthetics, functionality, and craftsmanship.</p>
             <p>From architectural exteriors and refined interiors to customized furniture and complete design execution, we bring every detail together with precision. Our team of skilled architects, designers, engineers, craftsmen and project experts transforms ideas into modern, functional, and inspiring spaces — crafted to reflect the people who live and work in them.</p>
             <div className="mini-stats">
               <span><b>200+</b>Projects Completed</span>
@@ -314,7 +314,7 @@ export default function App() {
             <p className="eyebrow">WHAT MAKES US UNIQUE</p>
             <h2>Craftsmanship is<br /><em>in the detail.</em></h2>
             <div className="stat-grid">
-              <StatItem stat={{ label: 'Founded By', detail: 'Well-known company "Bye Furniture"', value: '30', subLabel: 'Years of Experience', suffix: '', countTo: 30 }} index={0} visible={statementReveal.visible} />
+              <StatItem stat={{ label: 'Founded By', detail: 'BTS Furniture', value: '30', subLabel: 'Years of Experience', suffix: '', countTo: 30 }} index={0} visible={statementReveal.visible} />
               <StatItem stat={{ label: 'Manufacturing', value: 'In-House', subLabel: 'Precision production' }} index={1} visible={statementReveal.visible} />
               <StatItem stat={{ label: 'Execution', value: 'End-to-End', subLabel: 'Complete project delivery' }} index={2} visible={statementReveal.visible} />
               <StatItem stat={{ label: 'Scale', value: 'Built for Scale', subLabel: 'Large & Custom Projects' }} index={3} visible={statementReveal.visible} />
@@ -326,7 +326,7 @@ export default function App() {
         {/* FOUNDERS */}
         <section className="founder section" ref={founderReveal.ref}>
           <div className={`founder-photo ${founderReveal.visible ? 'is-visible' : ''}`}>
-            <img src="/founder.jpeg" alt="Shatrughan Sharma, founder of Cozyhaven Studio" loading="lazy" />
+            <img src="/founder.jpeg" alt="Shatrughan Sharma, founder of CozyHaven Studio" loading="lazy" />
             <div className="founder-photo-label">
               <span>Shatrughan Sharma</span>
               <span>Founder</span>
@@ -335,24 +335,26 @@ export default function App() {
           </div>
           <div className={`founder-copy ${founderReveal.visible ? 'is-visible' : ''}`}>
             <p className="eyebrow">03 · MEET THE FOUNDERS</p>
+            <h2>The hands behind<br /><em>CozyHaven Studio.</em></h2>
             <div className="founder-profile founder-profile-primary">
-              <h2>Shatrughan<br /><em>Sharma</em></h2>
+              <span className="founder-profile-num">01</span>
+              <h3>Shatrughan Sharma</h3>
               <p className="founder-role">Founder · CozyHaven Studio</p>
               <p>Shatrughan Sharma came to Pune in 1996 with determination and a willingness to build from the ground up. Over 28+ years, his journey has grown from hands-on work into a company founded on craftsmanship, trust, and commitment.</p>
               <p>Today, his experience and vision continue to shape CozyHaven Studio — bringing together people, design, and precision to create spaces built to last.</p>
             </div>
+            <div className="founder-divider" />
             <div className="founder-profile founder-profile-secondary">
               <span className="founder-profile-num">02</span>
               <h3>Roshan Sharma</h3>
               <p className="founder-role">Co-Founder | CozyHaven Studio</p>
-              <p>Roshan Sharma is a B.Tech Engineering graduate from Savitribai Phule Pune University (SPPU), with an additional degree in VFX and Animation. His background combines technical expertise, creative thinking, and business understanding.</p>
-              <p>He began his professional journey with hands-on industry experience in project management, client coordination, and business operations. With an entrepreneurial mindset and a vision for growth, he gradually stepped into leadership and took on the role of Co-Founder at CHS.</p>
-              <p>At CHS, he focuses on business development, strategic growth, innovation, and operational excellence, with a vision to build CHS into a trusted and forward-thinking brand. His approach combines creativity with practical execution, aiming to deliver quality, innovation, and long-term value to every client.</p>
+              <p>A B.Tech Engineering graduate from Savitribai Phule Pune University (SPPU), with an additional degree in VFX &amp; Animation, Roshan brings together technical expertise, creative thinking, and business insight.</p>
+              <p>With hands-on industry experience in project management, client coordination, and business operations, he focuses on business development, strategic growth, innovation, and operational excellence — helping shape the studio into a trusted, forward-thinking brand.</p>
             </div>
             <div className="timeline">
               <TimelineStat countTo={1996} label="The Beginning" visible={founderReveal.visible} />
               <TimelineStat countTo={28} value="+" label="Years of Experience" visible={founderReveal.visible} />
-              <TimelineStat value="Today" label="Building Cozyhaven Studio" visible={founderReveal.visible} />
+              <TimelineStat value="Today" label="Building BTS Furniture & CozyHaven Studio" visible={founderReveal.visible} />
             </div>
           </div>
         </section>
@@ -511,7 +513,7 @@ export default function App() {
           </div>
           <div className="footer-divider" />
           <div className="footer-bottom">
-            <span>© 2026 Cozyhaven Studio. All rights reserved.</span>
+            <span>© 2026 CozyHaven Studio. All rights reserved.</span>
             <span>Crafting Space. Creating Dreams.</span>
           </div>
         </div>
