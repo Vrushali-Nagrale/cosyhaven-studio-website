@@ -51,17 +51,17 @@ const featuredProjects: Project[] = [
   { name: 'MG Opera', place: 'Wakad', image: '/project1.jpeg' },
   { name: 'Gaikwad Nirvana', place: 'Pune', image: '/Gaikwad nirvana.jpeg' },
   { name: 'VJ Supernova', place: 'Wakad', image: '/VJ SUPERNOVA.jpeg' },
-  { name: 'Yashone Infinitee', place: 'Punawale', image: '/Yashone infinitee,punawale.jpeg' },
+  { name: 'Yashone Infinitee', place: 'Punawale', image: '/Yashone_infinitee,punawale copy 2.jpeg' },
   { name: 'VTP Belair', place: 'Pune', image: '/vtp belair (2).jpeg' },
   { name: 'RGS Forte', place: 'Pune', image: '/RGS forte.jpeg' },
   { name: 'Austin Arena', place: 'Pune', image: '/Austin arena.jpeg' },
   { name: 'Empire Square', place: 'Pune', image: '/Empire square.jpeg' },
-  { name: 'Kamalraj Athens', place: 'Wakad', image: '/kamalraj athens, wakad.jpeg' },
+  { name: 'Kamalraj Athens', place: 'Wakad', image: '/kamalraj_athens,_wakad copy 2.jpeg' },
   { name: 'VJ Supernova 2', place: 'Wakad', image: '/Vj supernova 2.jpeg' },
   { name: 'Life Republic', place: 'Pune', image: '/Life republic.jpeg' },
   { name: 'Life Republic R7', place: 'Pune', image: '/life republic R7.jpeg' },
   { name: 'Aloha Wakad', place: 'Wakad', image: '/Aloha wakad.jpeg' },
-  { name: 'Stellar Homes', place: 'Hinjewadi', image: '/stellar homes , hinjewadi.jpeg' },
+  { name: 'Stellar Homes', place: 'Hinjewadi', image: '/stellar_homes_,_hinjewadi copy 2.jpeg' },
 ]
 
 const moreProjects: Project[] = [
