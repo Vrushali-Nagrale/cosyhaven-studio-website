@@ -14,9 +14,9 @@ const serviceItems: ServiceItem[] = [
     images: [
       { src: '/project1.jpeg', label: 'VJ Yashwin Supernova, Wakad' },
       { src: '/project2.jpeg', label: 'ANP Memento, Wakad' },
-      { src: '/Empire square.jpeg', label: 'Empire Square' },
-      { src: '/MG Opera.jpeg', label: 'MG Opera, Wakad' },
-      { src: '/Gaikwad nirvana.jpeg', label: 'Gaikwad Nirvana' },
+      { src: '/empire-square.jpeg', label: 'Empire Square' },
+      { src: '/mg-opera.jpeg', label: 'MG Opera, Wakad' },
+      { src: '/gaikwad-nirvana.jpeg', label: 'Gaikwad Nirvana' },
     ],
   },
   {
@@ -28,7 +28,7 @@ const serviceItems: ServiceItem[] = [
       { src: '/project12.jpeg', label: 'Modular Kitchen' },
       { src: '/project3.jpeg', label: 'Kumar Presidency, Koregaon Park' },
       { src: '/project6.jpeg', label: 'Sukhwani Kingsley, Wakad' },
-      { src: '/Austin arena.jpeg', label: 'Austin Arena' },
+      { src: '/austin-arena.jpeg', label: 'Austin Arena' },
       { src: '/project17.jpeg', label: 'Custom Study & Storage' },
     ],
   },
@@ -38,30 +38,27 @@ const serviceItems: ServiceItem[] = [
     desc: 'End-to-end execution — everything handled under one roof, from design and planning to final finishing and handover. One studio, one point of contact, zero coordination overhead.',
     includes: ['POP & false ceiling', 'Electrical work', 'Plumbing', 'Painting & flooring', 'Modular furniture', 'Interior finishing', 'Complete site execution'],
     images: [
-      { src: '/Aloha wakad.jpeg', label: 'Aloha, Wakad' },
+      { src: '/aloha-wakad.jpeg', label: 'Aloha, Wakad' },
       { src: '/project9.jpeg', label: 'Study & Living — Full Execution' },
       { src: '/project11.jpeg', label: 'Entry Foyer — Complete Finish' },
       { src: '/project14.jpeg', label: 'TV Unit & Room — Turnkey' },
-      { src: '/Life republic.jpeg', label: 'Life Republic' },
+      { src: '/life-republic.jpeg', label: 'Life Republic' },
     ],
   },
 ]
 
 const featuredProjects: Project[] = [
   { name: 'MG Opera', place: 'Wakad', image: '/project1.jpeg' },
-  { name: 'Gaikwad Nirvana', place: 'Pune', image: '/Gaikwad nirvana.jpeg' },
-  { name: 'VJ Supernova', place: 'Wakad', image: '/VJ SUPERNOVA.jpeg' },
-  { name: 'Yashone Infinitee', place: 'Punawale', image: '/Yashone_infinitee,punawale copy 2.jpeg' },
-  { name: 'VTP Belair', place: 'Pune', image: '/vtp belair (2).jpeg' },
-  { name: 'RGS Forte', place: 'Pune', image: '/RGS forte.jpeg' },
-  { name: 'Austin Arena', place: 'Pune', image: '/Austin arena.jpeg' },
-  { name: 'Empire Square', place: 'Pune', image: '/Empire square.jpeg' },
-  { name: 'Kamalraj Athens', place: 'Wakad', image: '/kamalraj_athens,_wakad copy 2.jpeg' },
-  { name: 'VJ Supernova 2', place: 'Wakad', image: '/Vj supernova 2.jpeg' },
-  { name: 'Life Republic', place: 'Pune', image: '/Life republic.jpeg' },
-  { name: 'Life Republic R7', place: 'Pune', image: '/life republic R7.jpeg' },
-  { name: 'Aloha Wakad', place: 'Wakad', image: '/Aloha wakad.jpeg' },
-  { name: 'Stellar Homes', place: 'Hinjewadi', image: '/stellar_homes_,_hinjewadi copy 2.jpeg' },
+  { name: 'Gaikwad Nirvana', place: 'Pune', image: '/gaikwad-nirvana.jpeg' },
+  { name: 'VJ Supernova', place: 'Wakad', image: '/vj-supernova.jpeg' },
+  { name: 'VTP Belair', place: 'Pune', image: '/vtp-belair.jpeg' },
+  { name: 'RGS Forte', place: 'Pune', image: '/rgs-forte.jpeg' },
+  { name: 'Austin Arena', place: 'Pune', image: '/austin-arena.jpeg' },
+  { name: 'Empire Square', place: 'Pune', image: '/empire-square.jpeg' },
+  { name: 'VJ Supernova 2', place: 'Wakad', image: '/vj-supernova-2.jpeg' },
+  { name: 'Life Republic', place: 'Pune', image: '/life-republic.jpeg' },
+  { name: 'Life Republic R7', place: 'Pune', image: '/life-republic-r7.jpeg' },
+  { name: 'Aloha Wakad', place: 'Wakad', image: '/aloha-wakad.jpeg' },
 ]
 
 const moreProjects: Project[] = [
@@ -77,10 +74,10 @@ const moreProjects: Project[] = [
 ]
 
 const machines = [
-  { num: '01', name: 'Panel Saw Machine', desc: 'Precision cutting for accurate dimensions.', image: '/panel saw machine.jpeg' },
-  { num: '02', name: 'Xpress Pressing Machine', desc: 'Uniform pressing for strong and durable components.', image: '/xpress pressing machine.jpeg' },
-  { num: '03', name: 'Multi Boring Machine', desc: 'Precision drilling for seamless furniture assembly.', image: '/multi boring machine.jpeg' },
-  { num: '04', name: 'PVC Edge Banding Machine', desc: 'Clean, durable edges for a refined finish.', image: '/pvc edge banding machine.jpeg' },
+  { num: '01', name: 'Panel Saw Machine', desc: 'Precision cutting for accurate dimensions.', image: '/panel-saw-machine.jpeg' },
+  { num: '02', name: 'Xpress Pressing Machine', desc: 'Uniform pressing for strong and durable components.', image: '/xpress-pressing-machine.jpeg' },
+  { num: '03', name: 'Multi Boring Machine', desc: 'Precision drilling for seamless furniture assembly.', image: '/multi-boring-machine.jpeg' },
+  { num: '04', name: 'PVC Edge Banding Machine', desc: 'Clean, durable edges for a refined finish.', image: '/pvc-edge-banding-machine.jpeg' },
 ]
 
 function RevealText({ children, className = '', delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
@@ -196,7 +193,7 @@ export default function App() {
     <div className="site-shell">
       <header className={`site-header ${scrolled ? 'scrolled' : ''}`}>
         <a className="brand" href="#top" onClick={(e) => { e.preventDefault(); scrollTo('top') }}>
-          <img src="/cozyhaven logo.jpeg" alt="Cozyhaven Studio" />
+          <img src="/cozyhaven-logo.jpeg" alt="Cozyhaven Studio" />
           <span>COZYHAVEN <b>STUDIO</b></span>
         </a>
         <nav className={menuOpen ? 'open' : ''}>
@@ -213,7 +210,7 @@ export default function App() {
         {/* HERO */}
         <section className="hero">
           <div className="hero-bg" ref={heroBgRef}>
-            <img className="hero-image" src="/hero main.jpeg" alt="Cozyhaven Studio interior" fetchPriority="high" />
+            <img className="hero-image" src="/hero-main.jpeg" alt="Cozyhaven Studio interior" fetchPriority="high" />
           </div>
           <div className="hero-shade" />
           <div className="hero-content">
@@ -240,10 +237,10 @@ export default function App() {
         <section id="studio" className="about section" ref={aboutReveal.ref}>
           <div className={`about-visual ${aboutReveal.visible ? 'is-visible' : ''}`}>
             <div className="about-image-main">
-              <img src="/ABOUTus main.jpeg" alt="Cozyhaven Studio interior project" loading="lazy" />
+              <img src="/aboutus-main.jpeg" alt="Cozyhaven Studio interior project" loading="lazy" />
             </div>
             <div className="about-image-sub">
-              <img src="/About us small.jpeg" alt="Interior design detail" loading="lazy" />
+              <img src="/about-us-small.jpeg" alt="Interior design detail" loading="lazy" />
             </div>
             <div className="about-image-label">The Studio</div>
           </div>
