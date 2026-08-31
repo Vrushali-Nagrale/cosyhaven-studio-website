@@ -83,8 +83,6 @@ const machines = [
   { num: '04', name: 'PVC Edge Banding Machine', desc: 'Clean, durable edges for a refined finish.', image: '/pvc edge banding machine.jpeg' },
 ]
 
-const projectTypes = ['Residential Interior', 'Commercial Interior', 'Architecture', 'Furniture', 'Turnkey Project', 'Other']
-
 function RevealText({ children, className = '', delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
   const { ref, visible } = useReveal<HTMLDivElement>(0.2)
   return (
@@ -123,9 +121,6 @@ export default function App() {
   const [activeProject, setActiveProject] = useState(0)
   const [activeService, setActiveService] = useState<number | null>(null)
   const [formOpen, setFormOpen] = useState(false)
-  const [formSubmitted, setFormSubmitted] = useState(false)
-  const [formSubmitting, setFormSubmitting] = useState(false)
-  const [formError, setFormError] = useState('')
   const [dragging, setDragging] = useState(false)
   const [cursorOver, setCursorOver] = useState(false)
 
@@ -197,39 +192,6 @@ export default function App() {
     setTimeout(() => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' }), 50)
   }
 
-  const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    if (formSubmitting) return
-
-    setFormSubmitting(true)
-    setFormError('')
-
-    const form = e.currentTarget
-    const values = Object.fromEntries(new FormData(form).entries())
-    const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/submit-project-enquiry`, {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(values),
-    }).catch(() => null)
-
-    if (!response || !response.ok) {
-      setFormSubmitting(false)
-      setFormError('We could not send your enquiry. Please try again or contact us directly.')
-      return
-    }
-
-    form.reset()
-    setFormSubmitting(false)
-    setFormSubmitted(true)
-    setTimeout(() => {
-      setFormSubmitted(false)
-      setFormOpen(false)
-    }, 3500)
-  }
-
   return (
     <div className="site-shell">
       <header className={`site-header ${scrolled ? 'scrolled' : ''}`}>
@@ -263,7 +225,7 @@ export default function App() {
             <p className="hero-copy">Architecture · Interior Design · Furniture Manufacturing · Turnkey Execution</p>
             <div className="actions">
               <button className="button gold" onClick={() => scrollTo('work')}>Explore our work <span className="arrow">→</span></button>
-              <button className="button line" onClick={() => setFormOpen(true)}>Start a project</button>
+              <button className="button line" onClick={() => setFormOpen(true)}>Get in touch</button>
             </div>
           </div>
           <div className="hero-rail hero-rail-left"><span>01</span><i /><span>14</span></div>
@@ -546,7 +508,7 @@ export default function App() {
             <h2>Let's create something<br /><em>built to last.</em></h2>
             <p>Tell us about your space and let's shape it together.</p>
             <div className="actions">
-              <button className="button gold" onClick={() => setFormOpen(true)}>Start a project <span className="arrow">→</span></button>
+              <button className="button gold" onClick={() => setFormOpen(true)}>Get in touch <span className="arrow">→</span></button>
               <a className="button line" href="https://wa.me/919561611052" target="_blank" rel="noreferrer">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 2a10 10 0 0 0-8.7 14.9L2 22l5.2-1.3A10 10 0 1 0 12 2z" /><path d="M8.5 8.2c.2-.5.4-.5.7-.5h.5c.2 0 .4 0 .6.5l.7 1.6c.1.2.1.4 0 .5l-.4.5c-.1.2-.3.3-.1.6a6 6 0 0 0 2.9 2.5c.3.1.4 0 .6-.2l.4-.5c.2-.2.3-.2.6-.1l1.5.8c.2.1.3.2.3.4v.6c0 .3-.3.6-.5.7a3 3 0 0 1-2.3 0 8 8 0 0 1-4.3-4 3 3 0 0 1-.3-2.4z" fill="currentColor" stroke="none" /></svg>
                 WhatsApp us
@@ -595,46 +557,18 @@ export default function App() {
         </div>
       </footer>
 
-      {/* PROJECT ENQUIRY MODAL */}
+      {/* CONTACT OPTIONS MODAL */}
       {formOpen && (
         <div className="modal-overlay" onClick={() => setFormOpen(false)}>
           <div className="modal" onClick={(e) => e.stopPropagation()}>
-            <button className="modal-close" onClick={() => setFormOpen(false)} aria-label="Close form">✕</button>
-            {!formSubmitted ? (
-              <>
-                <p className="eyebrow">PROJECT ENQUIRY</p>
-                <h3>Start a project</h3>
-                <p className="modal-sub">Tell us about your space and we'll get back to you.</p>
-                <form onSubmit={handleFormSubmit}>
-                  <div className="form-row">
-                    <label>Name<input name="name" type="text" required placeholder="Your name" /></label>
-                    <label>Phone<input name="phone" type="tel" required placeholder="Phone number" /></label>
-                  </div>
-                  <div className="form-row">
-                    <label>Email<input name="email" type="email" required placeholder="Email address" /></label>
-                    <label>Project Type
-                      <select name="projectType" required defaultValue="">
-                        <option value="" disabled>Select type</option>
-                        {projectTypes.map((t) => <option key={t} value={t}>{t}</option>)}
-                      </select>
-                    </label>
-                  </div>
-                  <div className="form-row">
-                    <label>Project Location<input name="projectLocation" type="text" required placeholder="City / Area" /></label>
-                    <label>Approximate Budget<input name="budget" type="text" required placeholder="₹ Range" /></label>
-                  </div>
-                  <label className="form-full">Tell us about your project<textarea name="message" rows={3} required placeholder="Share your vision..." /></label>
-                  {formError && <p role="alert">{formError}</p>}
-                  <button type="submit" className="button gold form-submit" disabled={formSubmitting}>{formSubmitting ? 'Sending enquiry...' : 'Submit project enquiry'} <span className="arrow">→</span></button>
-                </form>
-              </>
-            ) : (
-              <div className="form-success">
-                <div className="success-icon">✓</div>
-                <h3>Thank you</h3>
-                <p>Your enquiry has been received. We'll be in touch shortly.</p>
-              </div>
-            )}
+            <button className="modal-close" onClick={() => setFormOpen(false)} aria-label="Close">✕</button>
+            <p className="eyebrow">GET IN TOUCH</p>
+            <h3>Start a project</h3>
+            <p className="modal-sub">Reach out and let's shape your space together.</p>
+            <div className="actions" style={{ flexDirection: 'column', gap: '12px' }}>
+              <a className="button gold" href="tel:+919561611052">Call Us · +91 95616 11052 <span className="arrow">→</span></a>
+              <a className="button line" href="https://wa.me/919561611052" target="_blank" rel="noreferrer">WhatsApp Us</a>
+            </div>
           </div>
         </div>
       )}
