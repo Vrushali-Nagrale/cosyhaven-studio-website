@@ -429,24 +429,18 @@ export default function App() {
               </div>
             </div>
           </div>
-          <div className="project-gallery">
+          <div className="project-index">
             {featuredProjects.map((project, index) => (
               <button
                 key={project.name}
-                className={`project-gallery-item ${index === activeProject ? 'active' : ''}`}
+                className={index === activeProject ? 'active' : ''}
                 onMouseEnter={() => setActiveProject(index)}
                 onClick={() => setActiveProject(index)}
-                style={{ transitionDelay: `${(index % 4) * 0.08}s` }}
-                aria-label={`View ${project.name}`}
               >
-                <div className="project-gallery-image">
-                  <img src={project.image} alt={project.name} loading="lazy" />
-                </div>
-                <div className="project-gallery-meta">
-                  <span>{String(index + 1).padStart(2, '0')}</span>
-                  <strong>{project.name}</strong>
-                  <small>{project.place}</small>
-                </div>
+                <span>{String(index + 1).padStart(2, '0')}</span>
+                <strong>{project.name}</strong>
+                <small>{project.place}</small>
+                <div className="project-index-line" />
               </button>
             ))}
           </div>
