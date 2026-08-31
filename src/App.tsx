@@ -124,6 +124,8 @@ export default function App() {
   const [activeService, setActiveService] = useState<number | null>(null)
   const [formOpen, setFormOpen] = useState(false)
   const [formSubmitted, setFormSubmitted] = useState(false)
+  const [formSubmitting, setFormSubmitting] = useState(false)
+  const [formError, setFormError] = useState('')
   const [dragging, setDragging] = useState(false)
   const [cursorOver, setCursorOver] = useState(false)
 
@@ -195,8 +197,32 @@ export default function App() {
     setTimeout(() => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' }), 50)
   }
 
-  const handleFormSubmit = (e: React.FormEvent) => {
+  const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    if (formSubmitting) return
+
+    setFormSubmitting(true)
+    setFormError('')
+
+    const form = e.currentTarget
+    const values = Object.fromEntries(new FormData(form).entries())
+    const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/submit-project-enquiry`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(values),
+    }).catch(() => null)
+
+    if (!response || !response.ok) {
+      setFormSubmitting(false)
+      setFormError('We could not send your enquiry. Please try again or contact us directly.')
+      return
+    }
+
+    form.reset()
+    setFormSubmitting(false)
     setFormSubmitted(true)
     setTimeout(() => {
       setFormSubmitted(false)
@@ -581,24 +607,25 @@ export default function App() {
                 <p className="modal-sub">Tell us about your space and we'll get back to you.</p>
                 <form onSubmit={handleFormSubmit}>
                   <div className="form-row">
-                    <label>Name<input type="text" required placeholder="Your name" /></label>
-                    <label>Phone<input type="tel" required placeholder="Phone number" /></label>
+                    <label>Name<input name="name" type="text" required placeholder="Your name" /></label>
+                    <label>Phone<input name="phone" type="tel" required placeholder="Phone number" /></label>
                   </div>
                   <div className="form-row">
-                    <label>Email<input type="email" required placeholder="Email address" /></label>
+                    <label>Email<input name="email" type="email" required placeholder="Email address" /></label>
                     <label>Project Type
-                      <select required defaultValue="">
+                      <select name="projectType" required defaultValue="">
                         <option value="" disabled>Select type</option>
                         {projectTypes.map((t) => <option key={t} value={t}>{t}</option>)}
                       </select>
                     </label>
                   </div>
                   <div className="form-row">
-                    <label>Project Location<input type="text" placeholder="City / Area" /></label>
-                    <label>Approximate Budget<input type="text" placeholder="₹ Range" /></label>
+                    <label>Project Location<input name="projectLocation" type="text" required placeholder="City / Area" /></label>
+                    <label>Approximate Budget<input name="budget" type="text" required placeholder="₹ Range" /></label>
                   </div>
-                  <label className="form-full">Tell us about your project<textarea rows={3} placeholder="Share your vision..." /></label>
-                  <button type="submit" className="button gold form-submit">Submit project enquiry <span className="arrow">→</span></button>
+                  <label className="form-full">Tell us about your project<textarea name="message" rows={3} required placeholder="Share your vision..." /></label>
+                  {formError && <p role="alert">{formError}</p>}
+                  <button type="submit" className="button gold form-submit" disabled={formSubmitting}>{formSubmitting ? 'Sending enquiry...' : 'Submit project enquiry'} <span className="arrow">→</span></button>
                 </form>
               </>
             ) : (
