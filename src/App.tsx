@@ -189,10 +189,10 @@ export default function App() {
         <section id="studio" className="about section" ref={aboutReveal.ref}>
           <div className={`about-visual ${aboutReveal.visible ? 'is-visible' : ''}`}>
             <div className="about-image-main">
-              <img src="/project 7.jpeg" alt="Cozyhaven Studio interior project" loading="lazy" />
+              <img src="/ABOUTus main.jpeg" alt="Cozyhaven Studio interior project" loading="lazy" />
             </div>
             <div className="about-image-sub">
-              <img src="/project 4.jpeg" alt="Interior design detail" loading="lazy" />
+              <img src="/About us small.jpeg" alt="Interior design detail" loading="lazy" />
             </div>
             <div className="about-image-label">The Studio</div>
           </div>
@@ -201,9 +201,8 @@ export default function App() {
             <h2>Thoughtful spaces,<br /><em>made to last.</em></h2>
             <div className="rule" />
             <p>Cosyhaven Studio is a design and execution studio creating thoughtful spaces that blend aesthetics, functionality, and craftsmanship.</p>
-            <p>From architectural exteriors and refined interiors to customized furniture and complete design execution, we bring every detail together with precision. Our team of skilled designers, craftsmen, and project experts transforms ideas into modern, functional, and inspiring spaces — crafted to reflect the people who live and work in them.</p>
+            <p>From architectural exteriors and refined interiors to customized furniture and complete design execution, we bring every detail together with precision. Our team of skilled architects, designers, engineers, craftsmen and project experts transforms ideas into modern, functional, and inspiring spaces — crafted to reflect the people who live and work in them.</p>
             <div className="mini-stats">
-              <span><b>15+</b>Years of Experience</span>
               <span><b>200+</b>Projects Completed</span>
             </div>
           </div>
