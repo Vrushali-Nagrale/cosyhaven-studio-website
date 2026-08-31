@@ -2,7 +2,7 @@ import { useEffect, useRef, useState, useCallback } from 'react'
 import { useReveal } from './hooks/useReveal'
 import { useCountUp } from './hooks/useCountUp'
 
-type Project = { name: string; place: string; image: string }
+type Project = { name: string; place: string; image?: string }
 type ServiceItem = { num: string; title: string; desc: string; includes: string[]; images: { src: string; label: string }[] }
 
 const serviceItems: ServiceItem[] = [
@@ -48,14 +48,29 @@ const serviceItems: ServiceItem[] = [
 ]
 
 const projects: Project[] = [
-  { name: 'VJ Yashwin Supernova', place: 'Wakad', image: '/project1.jpeg' },
-  { name: 'ANP Memento', place: 'Wakad', image: '/project2.jpeg' },
-  { name: 'Kumar Presidency', place: 'Koregaon Park', image: '/project3.jpeg' },
-  { name: 'Park Titanium', place: 'Wakad', image: '/project 4.jpeg' },
-  { name: 'The Address', place: 'Baner', image: '/project5.jpeg' },
-  { name: 'Sukhwani Kingsley', place: 'Wakad', image: '/project6.jpeg' },
-  { name: 'Sukhwani Skylines', place: 'Wakad', image: '/project 7.jpeg' },
-  { name: 'MG Opera', place: 'Wakad', image: '/project8.jpeg' },
+  { name: 'MG Opera', place: 'Wakad', image: '/project1.jpeg' },
+  { name: 'Gaikwad Nirvana', place: 'Pune', image: '/Gaikwad nirvana.jpeg' },
+  { name: 'VJ Supernova', place: 'Wakad', image: '/VJ SUPERNOVA.jpeg' },
+  { name: 'Yashone Infinitee', place: 'Punawale', image: '/Yashone infinitee,punawale.jpeg' },
+  { name: 'VTP Belair', place: 'Pune', image: '/vtp belair (2).jpeg' },
+  { name: 'RGS Forte', place: 'Pune', image: '/RGS forte.jpeg' },
+  { name: 'Austin Arena', place: 'Pune', image: '/Austin arena.jpeg' },
+  { name: 'Empire Square', place: 'Pune', image: '/Empire square.jpeg' },
+  { name: 'Kamalraj Athens', place: 'Wakad', image: '/kamalraj athens, wakad.jpeg' },
+  { name: 'VJ Supernova 2', place: 'Wakad', image: '/Vj supernova 2.jpeg' },
+  { name: 'Life Republic', place: 'Pune', image: '/Life republic.jpeg' },
+  { name: 'Life Republic R7', place: 'Pune', image: '/life republic R7.jpeg' },
+  { name: 'Aloha Wakad', place: 'Wakad', image: '/Aloha wakad.jpeg' },
+  { name: 'Stellar Homes', place: 'Hinjewadi', image: '/stellar homes , hinjewadi.jpeg' },
+  { name: 'ANP Memento', place: 'Wakad' },
+  { name: 'Kumar Presidency', place: 'Koregaon Park' },
+  { name: 'Park Titan', place: 'Wakad' },
+  { name: 'The Address', place: 'Baner' },
+  { name: 'Sukhwani Kingsley', place: 'Wakad' },
+  { name: 'Sukhwani Skylines', place: 'Wakad' },
+  { name: 'Park 59', place: 'Pimpri' },
+  { name: 'Ganga Legend', place: 'Bavdhan' },
+  { name: 'Runwal The Central Park', place: 'Pimpri-Chinchwad' },
 ]
 
 const machines = [
@@ -119,6 +134,7 @@ export default function App() {
   const statementReveal = useReveal<HTMLDivElement>(0.2)
   const founderReveal = useReveal<HTMLDivElement>(0.15)
   const workReveal = useReveal<HTMLDivElement>(0.1)
+  const residentialReveal = useReveal<HTMLDivElement>(0.2)
   const mfgReveal = useReveal<HTMLDivElement>(0.1)
   const contactReveal = useReveal<HTMLDivElement>(0.15)
 
@@ -220,7 +236,7 @@ export default function App() {
               <button className="button line" onClick={() => setFormOpen(true)}>Start a project</button>
             </div>
           </div>
-          <div className="hero-rail hero-rail-left"><span>01</span><i /><span>08</span></div>
+          <div className="hero-rail hero-rail-left"><span>01</span><i /><span>23</span></div>
           <div className="hero-rail hero-rail-right">Architecture<br />Interiors<br />Furniture<br />Execution</div>
           <button className="scroll-note" onClick={() => scrollTo('studio')}>
             <span className="scroll-text">Scroll to explore</span>
@@ -378,23 +394,34 @@ export default function App() {
               style={{ cursor: dragging ? 'grabbing' : 'grab' }}
             >
               {projects.map((project, index) => (
-                <img
-                  key={project.name}
-                  src={project.image}
-                  alt={project.name}
-                  loading="lazy"
-                  className={index === activeProject ? 'is-active' : ''}
-                />
+                project.image ? (
+                  <img
+                    key={project.name}
+                    src={project.image}
+                    alt={project.name}
+                    loading="lazy"
+                    className={index === activeProject ? 'is-active' : ''}
+                  />
+                ) : (
+                  <div
+                    key={project.name}
+                    className={`project-text-only ${index === activeProject ? 'is-active' : ''}`}
+                  >
+                    <span className="project-text-only-num">{String(index + 1).padStart(2, '0')}</span>
+                    <span className="project-text-only-name">{project.name}</span>
+                    <span className="project-text-only-place">{project.place}</span>
+                  </div>
+                )
               ))}
-              <div className="project-counter"><span>0{activeProject + 1}</span><i /><span>0{projects.length}</span></div>
-              {cursorOver && !dragging && (
+              <div className="project-counter"><span>{String(activeProject + 1).padStart(2, '0')}</span><i /><span>{String(projects.length).padStart(2, '0')}</span></div>
+              {cursorOver && !dragging && projects[activeProject].image && (
                 <div className="project-drag-hint">Drag</div>
               )}
             </div>
             <div className="project-copy">
               <p className="eyebrow">Featured Project</p>
-              <div className="project-detail">
-                <span className="project-detail-num">{`0${activeProject + 1}`}</span>
+              <div className="project-detail" key={activeProject}>
+                <span className="project-detail-num">{String(activeProject + 1).padStart(2, '0')}</span>
                 <h3>{projects[activeProject].name}</h3>
                 <p>{projects[activeProject].place}</p>
               </div>
@@ -417,12 +444,21 @@ export default function App() {
                 onMouseEnter={() => setActiveProject(index)}
                 onClick={() => setActiveProject(index)}
               >
-                <span>0{index + 1}</span>
+                <span>{String(index + 1).padStart(2, '0')}</span>
                 <strong>{project.name}</strong>
                 <small>{project.place}</small>
                 <div className="project-index-line" />
               </button>
             ))}
+          </div>
+        </section>
+
+        {/* RESIDENTIAL SCALE */}
+        <section className="residential-scale" ref={residentialReveal.ref}>
+          <div className={`residential-scale-inner ${residentialReveal.visible ? 'is-visible' : ''}`}>
+            <p className="residential-scale-locations">Pune&nbsp;&nbsp;•&nbsp;&nbsp;Mumbai&nbsp;&nbsp;•&nbsp;&nbsp;Kolhapur&nbsp;&nbsp;•&nbsp;&nbsp;Solapur&nbsp;&nbsp;•&nbsp;&nbsp;Bengaluru&nbsp;&nbsp;•&nbsp;&nbsp;Hyderabad&nbsp;&nbsp;•&nbsp;&nbsp;Goa&nbsp;&nbsp;•&nbsp;&nbsp;+ Across India</p>
+            <h2 className="residential-scale-heading">2BHK <span className="residential-scale-arrow">→</span> 5BHK <span className="residential-scale-plus">+</span> Bungalows</h2>
+            <p className="residential-scale-sub">Residential projects of every scale</p>
           </div>
         </section>
 

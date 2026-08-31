@@ -401,6 +401,49 @@ h2 em { font: 300 italic 1.05em var(--serif); color: var(--gold); }
 .project-index-line { position: absolute; bottom: -1px; left: 0; width: 0; height: 1px; background: var(--gold); transition: width 0.5s var(--ease); }
 .project-index button:hover .project-index-line, .project-index button.active .project-index-line { width: 100%; }
 
+/* text-only project (no image) */
+.project-text-only {
+  position: absolute; inset: 0; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 10px; text-align: center;
+  background: var(--panel); padding: 40px;
+  opacity: 0; transform: scale(1.04);
+  transition: opacity 0.7s var(--ease), transform 0.9s var(--ease-expo);
+}
+.project-text-only.is-active { opacity: 1; transform: scale(1); }
+.project-text-only-num { font: 11px var(--display); color: var(--gold-dim); letter-spacing: 0.2em; }
+.project-text-only-name { font: clamp(24px, 3vw, 42px) var(--display); color: var(--ivory); line-height: 1.1; max-width: 80%; }
+.project-text-only-place { font: italic 18px var(--serif); color: var(--gold); }
+.project-text-only::before {
+  content: ''; position: absolute; top: 24px; left: 24px; width: 32px; height: 1px; background: var(--gold); opacity: 0.4;
+}
+.project-text-only::after {
+  content: ''; position: absolute; bottom: 24px; right: 24px; width: 32px; height: 1px; background: var(--gold); opacity: 0.4;
+}
+
+/* ── RESIDENTIAL SCALE ── */
+.residential-scale {
+  background: var(--dark); padding: 120px 7vw; text-align: center;
+  border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+}
+.residential-scale-inner {
+  opacity: 0; transform: translateY(30px);
+  transition: opacity 1s var(--ease), transform 1s var(--ease);
+}
+.residential-scale-inner.is-visible { opacity: 1; transform: translateY(0); }
+.residential-scale-locations {
+  font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted);
+  margin-bottom: 36px; line-height: 1.8;
+}
+.residential-scale-heading {
+  font: clamp(32px, 6vw, 84px) var(--display); color: var(--ivory);
+  line-height: 1.1; letter-spacing: -0.01em; margin: 0 0 20px;
+}
+.residential-scale-arrow { color: var(--gold); font-size: 0.7em; margin: 0 0.15em; }
+.residential-scale-plus { color: var(--gold); margin: 0 0.1em; }
+.residential-scale-sub {
+  font: italic 20px var(--serif); color: var(--muted);
+}
+
 /* ── MANUFACTURING ── */
 .manufacturing { display: grid; grid-template-columns: 0.65fr 1.35fr; gap: 8vw; background: var(--dark); align-items: start; }
 .mfg-intro { opacity: 0; transform: translateY(30px); transition: opacity 1s var(--ease), transform 1s var(--ease); }
@@ -541,6 +584,8 @@ select { cursor: pointer; }
   .project-copy { padding: 36px 28px; }
   .project-index { grid-template-columns: 1fr; }
   .project-index button { margin-right: 0; }
+  .residential-scale { padding: 80px 24px; }
+  .residential-scale-locations { font-size: 10px; letter-spacing: 0.12em; }
   .machine-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
   .contact { padding: 100px 24px; }
   .contact-grid { grid-template-columns: 1fr 1fr; margin-top: 60px; }
