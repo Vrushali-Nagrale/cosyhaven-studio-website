@@ -3,6 +3,49 @@ import { useReveal } from './hooks/useReveal'
 import { useCountUp } from './hooks/useCountUp'
 
 type Project = { name: string; place: string; image: string }
+type ServiceItem = { num: string; title: string; desc: string; includes: string[]; images: { src: string; label: string }[] }
+
+const serviceItems: ServiceItem[] = [
+  {
+    num: '01',
+    title: 'Architecture & Interior Design',
+    desc: 'Creating thoughtful architectural and interior spaces that balance aesthetics, functionality, materiality, and the way people experience a space.',
+    includes: ['Architectural design', 'Interior design', 'Space planning', 'Concept development', 'Material & finish selection', 'Detailed design & visualization'],
+    images: [
+      { src: '/project1.jpeg', label: 'VJ Yashwin Supernova, Wakad' },
+      { src: '/project2.jpeg', label: 'ANP Memento, Wakad' },
+      { src: '/Empire square.jpeg', label: 'Empire Square' },
+      { src: '/MG Opera.jpeg', label: 'MG Opera, Wakad' },
+      { src: '/Gaikwad nirvana.jpeg', label: 'Gaikwad Nirvana' },
+    ],
+  },
+  {
+    num: '02',
+    title: 'Modular Manufacturing',
+    desc: 'Precision-crafted modular furniture and components manufactured with quality materials, refined detailing, and controlled execution.',
+    includes: ['Modular kitchens', 'Wardrobes', 'Custom furniture', 'Storage solutions', 'Modular furniture components', 'Precision manufacturing & finishing'],
+    images: [
+      { src: '/project12.jpeg', label: 'Modular Kitchen' },
+      { src: '/project3.jpeg', label: 'Kumar Presidency, Koregaon Park' },
+      { src: '/project6.jpeg', label: 'Sukhwani Kingsley, Wakad' },
+      { src: '/Austin arena.jpeg', label: 'Austin Arena' },
+      { src: '/project17.jpeg', label: 'Custom Study & Storage' },
+    ],
+  },
+  {
+    num: '03',
+    title: 'Turnkey Execution',
+    desc: 'End-to-end execution — everything handled under one roof, from design and planning to final finishing and handover. One studio, one point of contact, zero coordination overhead.',
+    includes: ['POP & false ceiling', 'Electrical work', 'Plumbing', 'Painting & flooring', 'Modular furniture', 'Interior finishing', 'Complete site execution'],
+    images: [
+      { src: '/Aloha wakad.jpeg', label: 'Aloha, Wakad' },
+      { src: '/project9.jpeg', label: 'Study & Living — Full Execution' },
+      { src: '/project11.jpeg', label: 'Entry Foyer — Complete Finish' },
+      { src: '/project14.jpeg', label: 'TV Unit & Room — Turnkey' },
+      { src: '/Life republic.jpeg', label: 'Life Republic' },
+    ],
+  },
+]
 
 const projects: Project[] = [
   { name: 'VJ Yashwin Supernova', place: 'Wakad', image: '/project1.jpeg' },
@@ -13,14 +56,6 @@ const projects: Project[] = [
   { name: 'Sukhwani Kingsley', place: 'Wakad', image: '/project6.jpeg' },
   { name: 'Sukhwani Skylines', place: 'Wakad', image: '/project 7.jpeg' },
   { name: 'MG Opera', place: 'Wakad', image: '/project8.jpeg' },
-]
-
-const services = [
-  { title: 'Architecture', desc: 'Shaping enduring structures with a considered relationship between light, material, and place.', image: '/project9.jpeg' },
-  { title: 'Interior Design', desc: 'Creating elegant, comfortable, and functional spaces made for everyday living.', image: '/project11.jpeg' },
-  { title: 'Furniture', desc: 'Crafting custom furniture with quality materials and precise workmanship.', image: '/project12.jpeg' },
-  { title: 'Manufacturing', desc: 'Bringing precision, quality, and a refined finish together in our own workshop.', image: '/project13.jpeg' },
-  { title: 'Turnkey Execution', desc: 'Managing every detail from design and civil work to the final finishing touch.', image: '/project14.jpeg' },
 ]
 
 const machines = [
@@ -61,6 +96,7 @@ export default function App() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [activeProject, setActiveProject] = useState(0)
+  const [activeService, setActiveService] = useState<number | null>(null)
   const [formOpen, setFormOpen] = useState(false)
   const [formSubmitted, setFormSubmitted] = useState(false)
   const [dragging, setDragging] = useState(false)
@@ -215,20 +251,54 @@ export default function App() {
             <h2>Design, detail<br /><em>& delivery.</em></h2>
           </div>
           <div className={`service-list ${servicesReveal.visible ? 'is-visible' : ''}`}>
-            {services.map((service, index) => (
-              <div className="service-row" key={service.title} style={{ transitionDelay: `${index * 0.1}s` }}>
-                <span className="service-num">0{index + 1}</span>
-                <div className="service-body">
-                  <h3>{service.title}</h3>
-                  <p>{service.desc}</p>
+            {serviceItems.map((service, index) => {
+              const isOpen = activeService === index
+              return (
+                <div
+                  className={`service-row ${isOpen ? 'is-open' : ''}`}
+                  key={service.num}
+                  style={{ transitionDelay: `${index * 0.1}s` }}
+                  onClick={() => setActiveService(isOpen ? null : index)}
+                  role="button"
+                  aria-expanded={isOpen}
+                  tabIndex={0}
+                  onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setActiveService(isOpen ? null : index) } }}
+                >
+                  <div className="service-row-head">
+                    <span className="service-num">{service.num}</span>
+                    <div className="service-body">
+                      <h3>{service.title}</h3>
+                      <p>{service.desc}</p>
+                    </div>
+                    <span className="service-arrow" aria-hidden="true">{isOpen ? '↑' : '→'}</span>
+                  </div>
+                  <div className="service-expand" aria-hidden={!isOpen}>
+                    <div className="service-expand-inner">
+                      <div className="service-includes">
+                        {service.includes.map((item) => (
+                          <span key={item} className="service-tag">{item}</span>
+                        ))}
+                      </div>
+                      <div className="service-gallery">
+                        <div className="service-gallery-feature">
+                          <img src={service.images[0].src} alt={service.images[0].label} loading="lazy" />
+                          <span className="service-gallery-label">{service.images[0].label}</span>
+                        </div>
+                        <div className="service-gallery-grid">
+                          {service.images.slice(1).map((img) => (
+                            <div className="service-gallery-item" key={img.src}>
+                              <img src={img.src} alt={img.label} loading="lazy" />
+                              <span className="service-gallery-label">{img.label}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="service-line" />
                 </div>
-                <div className="service-image">
-                  <img src={service.image} alt={service.title} loading="lazy" />
-                </div>
-                <span className="service-arrow">→</span>
-                <div className="service-line" />
-              </div>
-            ))}
+              )
+            })}
           </div>
         </section>
 
