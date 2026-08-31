@@ -47,7 +47,7 @@ const serviceItems: ServiceItem[] = [
   },
 ]
 
-const projects: Project[] = [
+const featuredProjects: Project[] = [
   { name: 'MG Opera', place: 'Wakad', image: '/project1.jpeg' },
   { name: 'Gaikwad Nirvana', place: 'Pune', image: '/Gaikwad nirvana.jpeg' },
   { name: 'VJ Supernova', place: 'Wakad', image: '/VJ SUPERNOVA.jpeg' },
@@ -62,6 +62,9 @@ const projects: Project[] = [
   { name: 'Life Republic R7', place: 'Pune', image: '/life republic R7.jpeg' },
   { name: 'Aloha Wakad', place: 'Wakad', image: '/Aloha wakad.jpeg' },
   { name: 'Stellar Homes', place: 'Hinjewadi', image: '/stellar homes , hinjewadi.jpeg' },
+]
+
+const moreProjects: Project[] = [
   { name: 'ANP Memento', place: 'Wakad' },
   { name: 'Kumar Presidency', place: 'Koregaon Park' },
   { name: 'Park Titan', place: 'Wakad' },
@@ -134,6 +137,7 @@ export default function App() {
   const statementReveal = useReveal<HTMLDivElement>(0.2)
   const founderReveal = useReveal<HTMLDivElement>(0.15)
   const workReveal = useReveal<HTMLDivElement>(0.1)
+  const moreProjectsReveal = useReveal<HTMLDivElement>(0.15)
   const residentialReveal = useReveal<HTMLDivElement>(0.2)
   const mfgReveal = useReveal<HTMLDivElement>(0.1)
   const contactReveal = useReveal<HTMLDivElement>(0.15)
@@ -159,8 +163,8 @@ export default function App() {
   const changeProject = useCallback((dir: number) => {
     setActiveProject((prev) => {
       const next = prev + dir
-      if (next < 0) return projects.length - 1
-      if (next >= projects.length) return 0
+      if (next < 0) return featuredProjects.length - 1
+      if (next >= featuredProjects.length) return 0
       return next
     })
   }, [])
@@ -236,7 +240,7 @@ export default function App() {
               <button className="button line" onClick={() => setFormOpen(true)}>Start a project</button>
             </div>
           </div>
-          <div className="hero-rail hero-rail-left"><span>01</span><i /><span>23</span></div>
+          <div className="hero-rail hero-rail-left"><span>01</span><i /><span>14</span></div>
           <div className="hero-rail hero-rail-right">Architecture<br />Interiors<br />Furniture<br />Execution</div>
           <button className="scroll-note" onClick={() => scrollTo('studio')}>
             <span className="scroll-text">Scroll to explore</span>
@@ -393,28 +397,17 @@ export default function App() {
               onMouseLeave={() => setCursorOver(false)}
               style={{ cursor: dragging ? 'grabbing' : 'grab' }}
             >
-              {projects.map((project, index) => (
-                project.image ? (
-                  <img
-                    key={project.name}
-                    src={project.image}
-                    alt={project.name}
-                    loading="lazy"
-                    className={index === activeProject ? 'is-active' : ''}
-                  />
-                ) : (
-                  <div
-                    key={project.name}
-                    className={`project-text-only ${index === activeProject ? 'is-active' : ''}`}
-                  >
-                    <span className="project-text-only-num">{String(index + 1).padStart(2, '0')}</span>
-                    <span className="project-text-only-name">{project.name}</span>
-                    <span className="project-text-only-place">{project.place}</span>
-                  </div>
-                )
+              {featuredProjects.map((project, index) => (
+                <img
+                  key={project.name}
+                  src={project.image}
+                  alt={project.name}
+                  loading="lazy"
+                  className={index === activeProject ? 'is-active' : ''}
+                />
               ))}
-              <div className="project-counter"><span>{String(activeProject + 1).padStart(2, '0')}</span><i /><span>{String(projects.length).padStart(2, '0')}</span></div>
-              {cursorOver && !dragging && projects[activeProject].image && (
+              <div className="project-counter"><span>{String(activeProject + 1).padStart(2, '0')}</span><i /><span>{String(featuredProjects.length).padStart(2, '0')}</span></div>
+              {cursorOver && !dragging && (
                 <div className="project-drag-hint">Drag</div>
               )}
             </div>
@@ -422,39 +415,66 @@ export default function App() {
               <p className="eyebrow">Featured Project</p>
               <div className="project-detail" key={activeProject}>
                 <span className="project-detail-num">{String(activeProject + 1).padStart(2, '0')}</span>
-                <h3>{projects[activeProject].name}</h3>
-                <p>{projects[activeProject].place}</p>
+                <h3>{featuredProjects[activeProject].name}</h3>
+                <p>{featuredProjects[activeProject].place}</p>
               </div>
               <div className="project-nav">
                 <button onClick={() => changeProject(-1)} aria-label="Previous project">←</button>
                 <button onClick={() => changeProject(1)} aria-label="Next project">→</button>
               </div>
               <div className="project-dots">
-                {projects.map((project, index) => (
+                {featuredProjects.map((project, index) => (
                   <button key={project.name} className={index === activeProject ? 'active' : ''} onClick={() => setActiveProject(index)} aria-label={`View ${project.name}`} />
                 ))}
               </div>
             </div>
           </div>
-          <div className="project-index">
-            {projects.map((project, index) => (
+          <div className="project-gallery">
+            {featuredProjects.map((project, index) => (
               <button
                 key={project.name}
-                className={index === activeProject ? 'active' : ''}
+                className={`project-gallery-item ${index === activeProject ? 'active' : ''}`}
                 onMouseEnter={() => setActiveProject(index)}
                 onClick={() => setActiveProject(index)}
+                style={{ transitionDelay: `${(index % 4) * 0.08}s` }}
+                aria-label={`View ${project.name}`}
               >
-                <span>{String(index + 1).padStart(2, '0')}</span>
-                <strong>{project.name}</strong>
-                <small>{project.place}</small>
-                <div className="project-index-line" />
+                <div className="project-gallery-image">
+                  <img src={project.image} alt={project.name} loading="lazy" />
+                </div>
+                <div className="project-gallery-meta">
+                  <span>{String(index + 1).padStart(2, '0')}</span>
+                  <strong>{project.name}</strong>
+                  <small>{project.place}</small>
+                </div>
               </button>
             ))}
           </div>
         </section>
 
+        {/* MORE PROJECTS */}
+        <section className="more-projects" ref={moreProjectsReveal.ref}>
+          <div className={`more-projects-inner ${moreProjectsReveal.visible ? 'is-visible' : ''}`}>
+            <p className="eyebrow">SELECTED PROJECTS</p>
+            <h2>More Projects</h2>
+            <div className="more-projects-list">
+              {moreProjects.map((project, index) => (
+                <div className="more-projects-item" key={project.name} style={{ transitionDelay: `${index * 0.06}s` }}>
+                  <span className="more-projects-num">{String(index + 1).padStart(2, '0')}</span>
+                  <div className="more-projects-content">
+                    <strong>{project.name}</strong>
+                    <small>{project.place}</small>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* RESIDENTIAL SCALE */}
         <section className="residential-scale" ref={residentialReveal.ref}>
+          <div className="residential-scale-bg" />
+          <div className="residential-scale-grid" />
           <div className={`residential-scale-inner ${residentialReveal.visible ? 'is-visible' : ''}`}>
             <p className="residential-scale-locations">Pune&nbsp;&nbsp;•&nbsp;&nbsp;Mumbai&nbsp;&nbsp;•&nbsp;&nbsp;Kolhapur&nbsp;&nbsp;•&nbsp;&nbsp;Solapur&nbsp;&nbsp;•&nbsp;&nbsp;Bengaluru&nbsp;&nbsp;•&nbsp;&nbsp;Hyderabad&nbsp;&nbsp;•&nbsp;&nbsp;Goa&nbsp;&nbsp;•&nbsp;&nbsp;+ Across India</p>
             <h2 className="residential-scale-heading">2BHK <span className="residential-scale-arrow">→</span> 5BHK <span className="residential-scale-plus">+</span> Bungalows</h2>
