@@ -667,6 +667,7 @@ select { cursor: pointer; }
   .founder-profile { padding-left: 0; }
   .founder-profile-num { position: static; display: block; margin-bottom: 14px; }
   .founder-profile-secondary h3 { font-size: 26px; }
+  .project-dots { display: none; }
   .project-image { min-height: 0; aspect-ratio: 4/5; background: var(--panel); }
   .project-image img { object-fit: contain; object-position: center; filter: brightness(0.92); transform: scale(1); }
   .project-image img.is-active { transform: scale(1); }
