@@ -76,20 +76,27 @@ function RevealText({ children, className = '', delay = 0 }: { children: React.R
   )
 }
 
-function StatItem({ stat, index, visible }: { stat: { value: string; label: string; countTo?: number }; index: number; visible: boolean }) {
+function StatItem({ stat, index, visible }: { stat: { value: string; label: string; detail?: string; subLabel?: string; countTo?: number; suffix?: string }; index: number; visible: boolean }) {
   const count = useCountUp(stat.countTo || 0, visible && stat.countTo !== undefined)
   return (
     <div className="stat-card" style={{ transitionDelay: `${index * 0.12}s` }}>
       <div className="stat-card-inner">
         <span className="stat-label">{`0${index + 1}`}</span>
+        <div className="stat-heading">{stat.label}</div>
+        {stat.detail && <div className="stat-detail">{stat.detail}</div>}
         <div className="stat-value">
-          {stat.countTo !== undefined ? <>{count}<em>+</em></> : stat.value}
+          {stat.countTo !== undefined ? <>{count}<em>{stat.suffix !== undefined ? stat.suffix : '+'}</em></> : stat.value}
         </div>
         <div className="stat-divider" />
-        <span className="stat-text">{stat.label}</span>
+        <span className="stat-text">{stat.subLabel || stat.label}</span>
       </div>
     </div>
   )
+}
+
+function TimelineStat({ value, countTo, label, visible }: { value?: string; countTo?: number; label: string; visible: boolean }) {
+  const count = useCountUp(countTo || 0, visible && countTo !== undefined, 2200)
+  return <span><b>{countTo !== undefined ? <>{count}{value || ''}</> : value}</b>{label}</span>
 }
 
 export default function App() {
@@ -282,14 +289,12 @@ export default function App() {
                       <div className="service-gallery">
                         <div className="service-gallery-feature">
                           <img src={service.images[0].src} alt={service.images[0].label} loading="lazy" />
-                          <span className="service-gallery-label">{service.images[0].label}</span>
                         </div>
                         <div className="service-gallery-grid">
                           {service.images.slice(1).map((img) => (
                             <div className="service-gallery-item" key={img.src}>
                               <img src={img.src} alt={img.label} loading="lazy" />
-                              <span className="service-gallery-label">{img.label}</span>
-                            </div>
+                              </div>
                           ))}
                         </div>
                       </div>
@@ -309,18 +314,19 @@ export default function App() {
             <p className="eyebrow">WHAT MAKES US UNIQUE</p>
             <h2>Craftsmanship is<br /><em>in the detail.</em></h2>
             <div className="stat-grid">
-              <StatItem stat={{ value: '15+', label: 'Years of Experience', countTo: 15 }} index={0} visible={statementReveal.visible} />
-              <StatItem stat={{ value: 'In-House', label: 'Manufacturing' }} index={1} visible={statementReveal.visible} />
-              <StatItem stat={{ value: 'End-to-End', label: 'Execution' }} index={2} visible={statementReveal.visible} />
-              <StatItem stat={{ value: 'Built for Scale', label: 'Large & Custom Projects' }} index={3} visible={statementReveal.visible} />
+              <StatItem stat={{ label: 'Founded By', detail: 'Well-known company "Bye Furniture"', value: '30', subLabel: 'Years of Experience', suffix: '', countTo: 30 }} index={0} visible={statementReveal.visible} />
+              <StatItem stat={{ label: 'Manufacturing', value: 'In-House', subLabel: 'Precision production' }} index={1} visible={statementReveal.visible} />
+              <StatItem stat={{ label: 'Execution', value: 'End-to-End', subLabel: 'Complete project delivery' }} index={2} visible={statementReveal.visible} />
+              <StatItem stat={{ label: 'Scale', value: 'Built for Scale', subLabel: 'Large & Custom Projects' }} index={3} visible={statementReveal.visible} />
+              <StatItem stat={{ label: '3D & 2D', value: 'Visualisation', subLabel: 'Design clarity' }} index={4} visible={statementReveal.visible} />
             </div>
           </div>
         </section>
 
-        {/* FOUNDER */}
+        {/* FOUNDERS */}
         <section className="founder section" ref={founderReveal.ref}>
           <div className={`founder-photo ${founderReveal.visible ? 'is-visible' : ''}`}>
-            <img src="/founder.jpeg" alt="Shatrughan Sharma, founder" loading="lazy" />
+            <img src="/founder.jpeg" alt="Shatrughan Sharma, founder of Cozyhaven Studio" loading="lazy" />
             <div className="founder-photo-label">
               <span>Shatrughan Sharma</span>
               <span>Founder</span>
@@ -328,16 +334,25 @@ export default function App() {
             <div className="founder-photo-num">01</div>
           </div>
           <div className={`founder-copy ${founderReveal.visible ? 'is-visible' : ''}`}>
-            <p className="eyebrow">03 · MEET THE FOUNDER</p>
-            <h2>Shatrughan<br /><em>Sharma</em></h2>
-            <p className="lead">From humble beginnings to building a vision.</p>
-            <div className="rule" />
-            <p>Shatrughan Sharma came to Pune in 1996, with responsibilities, determination, and a willingness to build from the ground up. Over 28+ years, his journey has evolved from hands-on work to building a company founded on craftsmanship, trust, and commitment.</p>
-            <p>Today, his experience and vision continue to shape Cosyhaven Studio — bringing together people, design, and precision to create spaces built to last.</p>
+            <p className="eyebrow">03 · MEET THE FOUNDERS</p>
+            <div className="founder-profile founder-profile-primary">
+              <h2>Shatrughan<br /><em>Sharma</em></h2>
+              <p className="founder-role">Founder · CozyHaven Studio</p>
+              <p>Shatrughan Sharma came to Pune in 1996 with determination and a willingness to build from the ground up. Over 28+ years, his journey has grown from hands-on work into a company founded on craftsmanship, trust, and commitment.</p>
+              <p>Today, his experience and vision continue to shape CozyHaven Studio — bringing together people, design, and precision to create spaces built to last.</p>
+            </div>
+            <div className="founder-profile founder-profile-secondary">
+              <span className="founder-profile-num">02</span>
+              <h3>Roshan Sharma</h3>
+              <p className="founder-role">Co-Founder | CozyHaven Studio</p>
+              <p>Roshan Sharma is a B.Tech Engineering graduate from Savitribai Phule Pune University (SPPU), with an additional degree in VFX and Animation. His background combines technical expertise, creative thinking, and business understanding.</p>
+              <p>He began his professional journey with hands-on industry experience in project management, client coordination, and business operations. With an entrepreneurial mindset and a vision for growth, he gradually stepped into leadership and took on the role of Co-Founder at CHS.</p>
+              <p>At CHS, he focuses on business development, strategic growth, innovation, and operational excellence, with a vision to build CHS into a trusted and forward-thinking brand. His approach combines creativity with practical execution, aiming to deliver quality, innovation, and long-term value to every client.</p>
+            </div>
             <div className="timeline">
-              <span><b>1996</b>The Beginning</span>
-              <span><b>28+</b>Years of Experience</span>
-              <span><b>Today</b>Building Cozyhaven Studio</span>
+              <TimelineStat countTo={1996} label="The Beginning" visible={founderReveal.visible} />
+              <TimelineStat countTo={28} value="+" label="Years of Experience" visible={founderReveal.visible} />
+              <TimelineStat value="Today" label="Building Cozyhaven Studio" visible={founderReveal.visible} />
             </div>
           </div>
         </section>
