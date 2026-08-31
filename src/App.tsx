@@ -51,14 +51,17 @@ const featuredProjects: Project[] = [
   { name: 'MG Opera', place: 'Wakad', image: '/project1.jpeg' },
   { name: 'Gaikwad Nirvana', place: 'Pune', image: '/gaikwad-nirvana.jpeg' },
   { name: 'VJ Supernova', place: 'Wakad', image: '/vj-supernova.jpeg' },
+  { name: 'Yashone Infinitee', place: 'Punawale', image: '/vj-supernova.jpeg' },
   { name: 'VTP Belair', place: 'Pune', image: '/vtp-belair.jpeg' },
   { name: 'RGS Forte', place: 'Pune', image: '/rgs-forte.jpeg' },
   { name: 'Austin Arena', place: 'Pune', image: '/austin-arena.jpeg' },
   { name: 'Empire Square', place: 'Pune', image: '/empire-square.jpeg' },
   { name: 'VJ Supernova 2', place: 'Wakad', image: '/vj-supernova-2.jpeg' },
+  { name: 'Kamalraj Athens', place: 'Wakad', image: '/life-republic-r7.jpeg' },
   { name: 'Life Republic', place: 'Pune', image: '/life-republic.jpeg' },
   { name: 'Life Republic R7', place: 'Pune', image: '/life-republic-r7.jpeg' },
   { name: 'Aloha Wakad', place: 'Wakad', image: '/aloha-wakad.jpeg' },
+  { name: 'Stellar Homes', place: 'Hinjewadi', image: '/austin-arena.jpeg' },
 ]
 
 const moreProjects: Project[] = [
