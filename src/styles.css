@@ -445,6 +445,13 @@ h2 em { font: 300 italic 1.05em var(--serif); color: var(--gold); }
 .more-projects-content strong { font: 18px var(--display); color: var(--ivory); transition: color 0.3s; }
 .more-projects-item:hover .more-projects-content strong { color: var(--gold-bright); }
 .more-projects-content small { font-size: 10px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); }
+.more-projects-arrow {
+  margin-left: auto; background: none; border: 0; color: var(--gold);
+  font-size: 18px; cursor: pointer; padding: 4px 8px;
+  transition: color 0.3s, transform 0.3s;
+  align-self: center; flex-shrink: 0;
+}
+.more-projects-arrow:hover { color: var(--gold-bright); transform: translateX(4px); }
 
 /* ── RESIDENTIAL SCALE ── */
 .residential-scale {
@@ -491,6 +498,36 @@ h2 em { font: 300 italic 1.05em var(--serif); color: var(--gold); }
 .residential-scale-sub {
   font: italic 20px var(--serif); color: var(--muted);
 }
+
+/* ── JOURNAL ── */
+.journal {
+  padding: 140px 7vw; background: var(--dark); border-top: 1px solid var(--line); position: relative;
+}
+.journal-inner {
+  opacity: 0; transform: translateY(30px);
+  transition: opacity 1s var(--ease), transform 1s var(--ease);
+}
+.journal-inner.is-visible { opacity: 1; transform: translateY(0); }
+.journal h2 { font: 400 clamp(44px, 6vw, 84px) / 0.95 var(--display); letter-spacing: -0.03em; margin: 24px 0 16px; }
+.journal h2 em { font: 300 italic 1.05em var(--serif); color: var(--gold); }
+.journal-handle {
+  font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-dim);
+  margin-bottom: 56px;
+}
+.journal-gallery {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+}
+.journal-gallery-item {
+  overflow: hidden; cursor: pointer; aspect-ratio: 4/5;
+  opacity: 0; transform: translateY(30px);
+  transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+}
+.journal-inner.is-visible .journal-gallery-item { opacity: 1; transform: translateY(0); }
+.journal-gallery-item img {
+  width: 100%; height: 100%; object-fit: cover;
+  filter: brightness(0.85); transition: filter 0.5s, transform 0.7s var(--ease-expo);
+}
+.journal-gallery-item:hover img { filter: brightness(1); transform: scale(1.04); }
 
 /* ── MANUFACTURING ── */
 .manufacturing { display: grid; grid-template-columns: 0.65fr 1.35fr; gap: 8vw; background: var(--dark); align-items: start; }
@@ -664,6 +701,8 @@ select { cursor: pointer; }
   .project-index button { margin-right: 0; }
   .more-projects { padding: 80px 24px; }
   .more-projects-list { grid-template-columns: 1fr 1fr; }
+  .journal { padding: 90px 24px; }
+  .journal-gallery { gap: 16px; }
   .residential-scale { padding: 80px 24px; }
   .residential-scale-locations { font-size: 10px; letter-spacing: 0.12em; gap: 4px 8px; }
   .machine-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
@@ -703,6 +742,7 @@ select { cursor: pointer; }
   .project-image img.is-active { transform: scale(1); }
   .machine-grid { grid-template-columns: 1fr; }
   .more-projects-list { grid-template-columns: 1fr; }
+  .journal-gallery { grid-template-columns: 1fr; }
   .contact-grid { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr; gap: 30px; }
 }

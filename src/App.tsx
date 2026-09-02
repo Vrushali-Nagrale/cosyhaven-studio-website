@@ -12,11 +12,8 @@ const serviceItems: ServiceItem[] = [
     desc: 'Creating thoughtful architectural and interior spaces that balance aesthetics, functionality, materiality, and the way people experience a space.',
     includes: ['Architectural design', 'Interior design', 'Space planning', 'Concept development', 'Material & finish selection', 'Detailed design & visualization'],
     images: [
-      { src: '/project1.jpeg', label: 'VJ Yashwin Supernova, Wakad' },
-      { src: '/project2.jpeg', label: 'ANP Memento, Wakad' },
-      { src: '/empire-square.jpeg', label: 'Empire Square' },
-      { src: '/mg-opera.jpeg', label: 'MG Opera, Wakad' },
-      { src: '/gaikwad-nirvana.jpeg', label: 'Gaikwad Nirvana' },
+      { src: '/3d.jpeg', label: '3D Visualisation' },
+      { src: '/2d.jpeg', label: '2D Drawings' },
     ],
   },
   {
@@ -28,8 +25,8 @@ const serviceItems: ServiceItem[] = [
       { src: '/project12.jpeg', label: 'Modular Kitchen' },
       { src: '/project3.jpeg', label: 'Kumar Presidency, Koregaon Park' },
       { src: '/project6.jpeg', label: 'Sukhwani Kingsley, Wakad' },
-      { src: '/austin-arena.jpeg', label: 'Austin Arena' },
-      { src: '/project17.jpeg', label: 'Custom Study & Storage' },
+      { src: '/modular4.jpeg', label: 'Modular Detail' },
+      { src: '/modular5.jpeg', label: 'Modular Finish' },
     ],
   },
   {
@@ -38,8 +35,8 @@ const serviceItems: ServiceItem[] = [
     desc: 'End-to-end execution — everything handled under one roof, from design and planning to final finishing and handover. One studio, one point of contact, zero coordination overhead.',
     includes: ['Modular Furniture', 'POP & false ceiling', 'Electrical work', 'Civil Work', 'Site Building', 'Interior & Exterior Finishing', 'Complete site execution'],
     images: [
-      { src: '/aloha-wakad.jpeg', label: 'Aloha, Wakad' },
-      { src: '/project9.jpeg', label: 'Study & Living — Full Execution' },
+      { src: '/trunkey1st.jpeg', label: 'Turnkey Execution' },
+      { src: '/trunkey2nd-2.jpeg', label: 'Turnkey Detail' },
       { src: '/project11.jpeg', label: 'Entry Foyer — Complete Finish' },
       { src: '/project14.jpeg', label: 'TV Unit & Room — Turnkey' },
       { src: '/life-republic.jpeg', label: 'Life Republic' },
@@ -51,17 +48,17 @@ const featuredProjects: Project[] = [
   { name: 'MG Opera', place: 'Wakad', image: '/project1.jpeg' },
   { name: 'Gaikwad Nirvana', place: 'Pune', image: '/gaikwad-nirvana.jpeg' },
   { name: 'VJ Supernova', place: 'Wakad', image: '/vj-supernova.jpeg' },
-  { name: 'Yashone Infinitee', place: 'Punawale', image: '/vj-supernova.jpeg' },
+  { name: 'Yashone Infinitee', place: 'Punawale', image: '/yashone-infinitee.jpeg' },
   { name: 'VTP Belair', place: 'Pune', image: '/vtp-belair.jpeg' },
   { name: 'RGS Forte', place: 'Pune', image: '/rgs-forte.jpeg' },
   { name: 'Austin Arena', place: 'Pune', image: '/austin-arena.jpeg' },
   { name: 'Empire Square', place: 'Pune', image: '/empire-square.jpeg' },
   { name: 'VJ Supernova 2', place: 'Wakad', image: '/vj-supernova-2.jpeg' },
-  { name: 'Kamalraj Athens', place: 'Wakad', image: '/life-republic-r7.jpeg' },
+  { name: 'Kamalraj Athens', place: 'Wakad', image: '/kamalraj.jpeg' },
   { name: 'Life Republic', place: 'Pune', image: '/life-republic.jpeg' },
   { name: 'Life Republic R7', place: 'Pune', image: '/life-republic-r7.jpeg' },
   { name: 'Aloha Wakad', place: 'Wakad', image: '/aloha-wakad.jpeg' },
-  { name: 'Stellar Homes', place: 'Hinjewadi', image: '/austin-arena.jpeg' },
+  { name: 'Stellar Homes', place: 'Hinjewadi', image: '/stellars-homes.jpeg' },
 ]
 
 const moreProjects: Project[] = [
@@ -82,6 +79,12 @@ const machines = [
   { num: '02', name: 'Xpress Pressing Machine', desc: 'Uniform pressing for strong and durable components.', image: '/xpress-pressing-machine.jpeg' },
   { num: '03', name: 'Multi Boring Machine', desc: 'Precision drilling for seamless furniture assembly.', image: '/multi-boring-machine.jpeg' },
   { num: '04', name: 'PVC Edge Banding Machine', desc: 'Clean, durable edges for a refined finish.', image: '/pvc-edge-banding-machine.jpeg' },
+]
+
+const journalImages = [
+  '/journal1.jpeg', '/journal2.jpeg', '/journal3.jpeg', '/journal4.jpeg',
+  '/journal5.jpeg', '/journal6.jpeg', '/journal7.jpeg', '/journal8.jpeg',
+  '/journal9.jpeg', '/journal10.jpeg', '/journal11.jpeg', '/journal12.jpeg',
 ]
 
 function RevealText({ children, className = '', delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
@@ -135,6 +138,7 @@ export default function App() {
   const residentialReveal = useReveal<HTMLDivElement>(0.2)
   const mfgReveal = useReveal<HTMLDivElement>(0.1)
   const contactReveal = useReveal<HTMLDivElement>(0.15)
+  const journalReveal = useReveal<HTMLDivElement>(0.15)
 
   useEffect(() => {
     const onScroll = () => {
@@ -241,7 +245,7 @@ export default function App() {
           </div>
           <div className={`about-visual ${aboutReveal.visible ? 'is-visible' : ''}`}>
             <div className="about-image-main">
-              <img src="/aboutus-main.jpeg" alt="Cozyhaven Studio interior project" loading="lazy" />
+              <img src="/main-image-the-studio.jpeg" alt="Cozyhaven Studio interior project" loading="lazy" />
             </div>
             <div className="about-image-sub">
               <img src="/about-us-small.jpeg" alt="Interior design detail" loading="lazy" />
@@ -443,6 +447,9 @@ export default function App() {
                     <strong>{project.name}</strong>
                     <small>{project.place}</small>
                   </div>
+                  {index === moreProjects.length - 1 && (
+                    <button className="more-projects-arrow" onClick={() => scrollTo('journal')} aria-label="Go to Journal">→</button>
+                  )}
                 </div>
               ))}
             </div>
@@ -469,6 +476,22 @@ export default function App() {
             </div>
             <h2 className="residential-scale-heading">2BHK <span className="residential-scale-arrow">→</span> 5BHK <span className="residential-scale-plus">+</span> Bungalows</h2>
             <p className="residential-scale-sub">Residential projects of every scale</p>
+          </div>
+        </section>
+
+        {/* JOURNAL */}
+        <section id="journal" className="journal" ref={journalReveal.ref}>
+          <div className={`journal-inner ${journalReveal.visible ? 'is-visible' : ''}`}>
+            <p className="eyebrow">07 · THE JOURNAL</p>
+            <h2>Moments in<br /><em>the making.</em></h2>
+            <p className="journal-handle">@cozyhavenstudio</p>
+            <div className="journal-gallery">
+              {journalImages.map((img, index) => (
+                <div className="journal-gallery-item" key={index} onClick={() => setLightboxImage(img)}>
+                  <img src={img} alt={`Journal ${index + 1}`} loading="lazy" />
+                </div>
+              ))}
+            </div>
           </div>
         </section>
 
