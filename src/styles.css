@@ -275,7 +275,7 @@ h2 em { font: 300 italic 1.05em var(--serif); color: var(--gold); }
 }
 .service-row.is-open .service-gallery { opacity: 1; transform: translateY(0); }
 .service-gallery-feature, .service-gallery-item {
-  position: relative; overflow: hidden; background: var(--panel);
+  position: relative; overflow: hidden; background: var(--panel); cursor: pointer;
 }
 .service-gallery-feature { aspect-ratio: 16/10; }
 .service-gallery-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
@@ -471,9 +471,12 @@ h2 em { font: 300 italic 1.05em var(--serif); color: var(--gold); }
 }
 .residential-scale-inner.is-visible { opacity: 1; transform: translateY(0); }
 .residential-scale-locations {
+  display: flex; flex-wrap: wrap; justify-content: center; align-items: center;
+  gap: 4px 10px;
   font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted);
   margin-bottom: 36px; line-height: 1.8;
 }
+.residential-scale-locations .loc-sep { color: var(--gold-dim); }
 .residential-scale-heading {
   font: clamp(32px, 6vw, 84px) var(--display); color: var(--ivory);
   line-height: 1.1; letter-spacing: -0.01em; margin: 0 0 20px;
@@ -543,6 +546,13 @@ figcaption small { color: var(--muted); font-size: 11px; line-height: 1.5; }
 .footer-links a:hover { color: var(--gold-bright); }
 .footer-divider { height: 1px; background: var(--line); }
 .footer-bottom { display: flex; justify-content: space-between; padding-top: 22px; font-size: 10px; letter-spacing: 0.1em; color: var(--muted-dark); }
+.footer-social { display: flex; gap: 14px; justify-content: center; padding-top: 28px; }
+.footer-social a {
+  width: 42px; height: 42px; border: 1px solid var(--line);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--muted); transition: all 0.3s var(--ease);
+}
+.footer-social a:hover { border-color: var(--gold); color: var(--gold-bright); transform: translateY(-2px); }
 
 /* ── MODAL / FORM ── */
 .modal-overlay {
@@ -565,6 +575,28 @@ figcaption small { color: var(--muted); font-size: 11px; line-height: 1.5; }
 }
 .modal-close:hover { border-color: var(--gold); color: var(--gold-bright); }
 .modal h3 { font: 36px var(--display); margin: 12px 0 8px; }
+
+/* ── LIGHTBOX ── */
+.lightbox-overlay {
+  position: fixed; inset: 0; z-index: 300;
+  background: rgba(11, 10, 9, 0.92); backdrop-filter: blur(12px);
+  display: flex; align-items: center; justify-content: center;
+  padding: 40px;
+  animation: fadeIn 0.3s ease;
+}
+.lightbox-image {
+  max-width: 90vw; max-height: 85vh;
+  object-fit: contain;
+  border: 1px solid var(--line);
+}
+.lightbox-close {
+  position: absolute; top: 24px; right: 24px;
+  width: 44px; height: 44px; border: 1px solid var(--line);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; color: var(--ivory); transition: all 0.3s;
+  z-index: 301;
+}
+.lightbox-close:hover { border-color: var(--gold); color: var(--gold-bright); }
 .modal-sub { color: var(--muted); font-size: 13px; margin-bottom: 32px; }
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
 .form-full { display: block; margin-bottom: 24px; }
@@ -613,6 +645,10 @@ select { cursor: pointer; }
   .hero-rail-left { left: 24px; bottom: 28px; }
   .section { padding: 90px 24px; }
   .about, .founder, .services, .manufacturing { grid-template-columns: 1fr; gap: 50px; }
+  .about-copy { order: 1; }
+  .about-visual { order: 2; margin-top: 30px; }
+  .founder-copy { order: 1; }
+  .founder-photo { order: 2; margin: 30px auto 0; }
   .about-visual { margin-left: 0; width: 100%; }
   .about-image-main { aspect-ratio: 4/5; }
   .founder-photo { width: min(38vw, 220px); margin: 0; }
@@ -635,7 +671,7 @@ select { cursor: pointer; }
   .more-projects { padding: 80px 24px; }
   .more-projects-list { grid-template-columns: 1fr 1fr; }
   .residential-scale { padding: 80px 24px; }
-  .residential-scale-locations { font-size: 10px; letter-spacing: 0.12em; }
+  .residential-scale-locations { font-size: 10px; letter-spacing: 0.12em; gap: 4px 8px; }
   .machine-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
   .contact { padding: 100px 24px; }
   .contact-grid { grid-template-columns: 1fr 1fr; margin-top: 60px; }
@@ -675,6 +711,8 @@ select { cursor: pointer; }
   .more-projects-list { grid-template-columns: 1fr; }
   .contact-grid { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr; gap: 30px; }
+  .footer-social { gap: 10px; }
+  .footer-social a { width: 38px; height: 38px; }
   .footer-wordmark { font-size: 5rem; }
 }
 

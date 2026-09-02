@@ -36,7 +36,7 @@ const serviceItems: ServiceItem[] = [
     num: '03',
     title: 'Turnkey Execution',
     desc: 'End-to-end execution — everything handled under one roof, from design and planning to final finishing and handover. One studio, one point of contact, zero coordination overhead.',
-    includes: ['POP & false ceiling', 'Electrical work', 'Plumbing', 'Painting & flooring', 'Modular furniture', 'Interior finishing', 'Complete site execution'],
+    includes: ['Modular Furniture', 'POP & false ceiling', 'Electrical work', 'Civil Work', 'Site Building', 'Interior & Exterior Finishing', 'Complete site execution'],
     images: [
       { src: '/aloha-wakad.jpeg', label: 'Aloha, Wakad' },
       { src: '/project9.jpeg', label: 'Study & Living — Full Execution' },
@@ -74,6 +74,7 @@ const moreProjects: Project[] = [
   { name: 'Park 59', place: 'Pimpri' },
   { name: 'Ganga Legend', place: 'Bavdhan' },
   { name: 'Runwal The Central Park', place: 'Pimpri-Chinchwad' },
+  { name: '200+ projects completed till date', place: 'Scroll to the Gallery/Journal for more' },
 ]
 
 const machines = [
@@ -110,11 +111,6 @@ function StatItem({ stat, index, visible }: { stat: { value: string; label: stri
   )
 }
 
-function TimelineStat({ value, countTo, label, visible }: { value?: string; countTo?: number; label: string; visible: boolean }) {
-  const count = useCountUp(countTo || 0, visible && countTo !== undefined, 2200)
-  return <span><b>{countTo !== undefined ? <>{count}{value || ''}</> : value}</b>{label}</span>
-}
-
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
@@ -123,6 +119,7 @@ export default function App() {
   const [formOpen, setFormOpen] = useState(false)
   const [dragging, setDragging] = useState(false)
   const [cursorOver, setCursorOver] = useState(false)
+  const [lightboxImage, setLightboxImage] = useState<string | null>(null)
 
   const dragStartX = useRef(0)
   const dragDelta = useRef(0)
@@ -229,7 +226,7 @@ export default function App() {
             </div>
           </div>
           <div className="hero-rail hero-rail-left"><span>01</span><i /><span>14</span></div>
-          <div className="hero-rail hero-rail-right">Architecture<br />Interiors<br />Furniture<br />Execution</div>
+          <div className="hero-rail hero-rail-right">Architecture<br />Interiors<br />Furniture<br />Exterior</div>
           <button className="scroll-note" onClick={() => scrollTo('studio')}>
             <span className="scroll-text">Scroll to explore</span>
             <span className="scroll-arrow"><span /></span>
@@ -295,14 +292,14 @@ export default function App() {
                         ))}
                       </div>
                       <div className="service-gallery">
-                        <div className="service-gallery-feature">
+                        <div className="service-gallery-feature" onClick={(e) => { e.stopPropagation(); setLightboxImage(service.images[0].src) }}>
                           <img src={service.images[0].src} alt={service.images[0].label} loading="lazy" />
                         </div>
                         <div className="service-gallery-grid">
                           {service.images.slice(1).map((img) => (
-                            <div className="service-gallery-item" key={img.src}>
+                            <div className="service-gallery-item" key={img.src} onClick={(e) => { e.stopPropagation(); setLightboxImage(img.src) }}>
                               <img src={img.src} alt={img.label} loading="lazy" />
-                              </div>
+                            </div>
                           ))}
                         </div>
                       </div>
@@ -323,10 +320,10 @@ export default function App() {
             <h2>Craftsmanship is<br /><em>in the detail.</em></h2>
             <div className="stat-grid">
               <StatItem stat={{ label: 'Founded By', detail: 'BTS Furniture', value: '30', subLabel: 'Years of Experience', suffix: '', countTo: 30 }} index={0} visible={statementReveal.visible} />
-              <StatItem stat={{ label: 'Manufacturing', value: 'In-House', subLabel: 'Precision production' }} index={1} visible={statementReveal.visible} />
-              <StatItem stat={{ label: 'Execution', value: 'End-to-End', subLabel: 'Complete project delivery' }} index={2} visible={statementReveal.visible} />
-              <StatItem stat={{ label: 'Scale', value: 'Built for Scale', subLabel: 'Large & Custom Projects' }} index={3} visible={statementReveal.visible} />
-              <StatItem stat={{ label: '3D & 2D', value: 'Visualisation', subLabel: 'Design clarity' }} index={4} visible={statementReveal.visible} />
+              <StatItem stat={{ label: '3D & 2D', value: 'Visualisation', subLabel: 'Design clarity' }} index={1} visible={statementReveal.visible} />
+              <StatItem stat={{ label: 'Manufacturing', value: 'In-House', subLabel: 'Precision production' }} index={2} visible={statementReveal.visible} />
+              <StatItem stat={{ label: 'Execution', value: 'End-to-End', subLabel: 'Complete project delivery' }} index={3} visible={statementReveal.visible} />
+              <StatItem stat={{ label: 'Scale', value: 'Built for Scale', subLabel: 'Large & Custom Projects' }} index={4} visible={statementReveal.visible} />
             </div>
           </div>
         </section>
@@ -358,11 +355,6 @@ export default function App() {
               <p className="founder-role">Co-Founder | CozyHaven Studio</p>
               <p>A B.Tech Engineering graduate from Savitribai Phule Pune University (SPPU), with an additional degree in VFX &amp; Animation, Roshan brings together technical expertise, creative thinking, and business insight.</p>
               <p>With hands-on industry experience in project management, client coordination, and business operations, he focuses on business development, strategic growth, innovation, and operational excellence — helping shape the studio into a trusted, forward-thinking brand.</p>
-            </div>
-            <div className="timeline">
-              <TimelineStat countTo={1996} label="The Beginning" visible={founderReveal.visible} />
-              <TimelineStat countTo={28} value="+" label="Years of Experience" visible={founderReveal.visible} />
-              <TimelineStat value="Today" label="Building BTS Furniture & CozyHaven Studio" visible={founderReveal.visible} />
             </div>
           </div>
         </section>
@@ -458,7 +450,19 @@ export default function App() {
           <div className="residential-scale-bg" />
           <div className="residential-scale-grid" />
           <div className={`residential-scale-inner ${residentialReveal.visible ? 'is-visible' : ''}`}>
-            <p className="residential-scale-locations">Pune&nbsp;&nbsp;•&nbsp;&nbsp;Mumbai&nbsp;&nbsp;•&nbsp;&nbsp;Kolhapur&nbsp;&nbsp;•&nbsp;&nbsp;Solapur&nbsp;&nbsp;•&nbsp;&nbsp;Bengaluru&nbsp;&nbsp;•&nbsp;&nbsp;Hyderabad&nbsp;&nbsp;•&nbsp;&nbsp;Goa&nbsp;&nbsp;•&nbsp;&nbsp;+ Across India</p>
+            <div className="residential-scale-locations">
+              <span>Pune</span><span className="loc-sep">•</span>
+              <span>Mumbai</span><span className="loc-sep">•</span>
+              <span>Kolhapur</span><span className="loc-sep">•</span>
+              <span>Solapur</span><span className="loc-sep">•</span>
+              <span>Bengaluru</span><span className="loc-sep">•</span>
+              <span>Hyderabad</span><span className="loc-sep">•</span>
+              <span>Goa</span><span className="loc-sep">•</span>
+              <span>Jaipur</span><span className="loc-sep">•</span>
+              <span>Noida</span><span className="loc-sep">•</span>
+              <span>Ahmedabad</span><span className="loc-sep">•</span>
+              <span>+ Across India</span>
+            </div>
             <h2 className="residential-scale-heading">2BHK <span className="residential-scale-arrow">→</span> 5BHK <span className="residential-scale-plus">+</span> Bungalows</h2>
             <p className="residential-scale-sub">Residential projects of every scale</p>
           </div>
@@ -515,7 +519,7 @@ export default function App() {
               </a>
             </div>
             <div className="contact-grid">
-              <div><small>Phone / WhatsApp</small><a href="tel:9561611052">9561611052</a></div>
+              <div><small>Phone / WhatsApp</small><a href="tel:+919561611052">+91 9561611052</a></div>
               <div><small>Email</small><a href="mailto:cozyhavenstudio9@gmail.com">cozyhavenstudio9@gmail.com</a></div>
               <div><small>Office Address</small><a href="https://www.google.com/maps/search/?api=1&query=New+Wakad+Hinjawadi+Link+Rd+Bhatewara+Nagar+Hinjawadi+Wakad+Pimpri-Chinchwad+Maharashtra+411057" target="_blank" rel="noreferrer">New Wakad - Hinjawadi Link Rd, Bhatewara Nagar, Hinjawadi, Wakad, Pimpri-Chinchwad, Maharashtra 411057</a></div>
               <div><small>Business Hours</small><span>10:00 AM – 9:30 PM<br />Sunday – Monday · 7 Days</span></div>
@@ -546,13 +550,30 @@ export default function App() {
               <a href="https://youtube.com/@cozyhavenstudio?si=mwLGt4kNMWMq-wgA" target="_blank" rel="noreferrer">YouTube ↗</a>
               <a href="https://wa.me/919561611052" target="_blank" rel="noreferrer">WhatsApp ↗</a>
               <a href="mailto:cozyhavenstudio9@gmail.com">Email ↗</a>
-              <a href="tel:9561611052">9561611052</a>
+              <a href="tel:+919561611052">+91 9561611052</a>
             </div>
           </div>
           <div className="footer-divider" />
           <div className="footer-bottom">
             <span>© 2026 CozyHaven Studio. All rights reserved.</span>
             <span>Crafting Space. Creating Dreams.</span>
+          </div>
+          <div className="footer-social">
+            <a href="https://www.instagram.com/cozyhavenstudio?igsi=cjR5dm5udnBjN3o=" target="_blank" rel="noreferrer" aria-label="Instagram">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="2" y="2" width="20" height="20" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" /></svg>
+            </a>
+            <a href="https://youtube.com/@cozyhavenstudio?si=mwLGt4kNMWMq-wgA" target="_blank" rel="noreferrer" aria-label="YouTube">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M22 8.5a3 3 0 0 0-2.1-2.1C18 6 12 6 12 6s-6 0-7.9.4A3 3 0 0 0 2 8.5 31 31 0 0 0 1.7 12 31 31 0 0 0 2 15.5a3 3 0 0 0 2.1 2.1C6 18 12 18 12 18s6 0 7.9-.4A3 3 0 0 0 22 15.5 31 31 0 0 0 22.3 12 31 31 0 0 0 22 8.5z" /><path d="M10 9l5 3-5 3z" fill="currentColor" stroke="none" /></svg>
+            </a>
+            <a href="https://wa.me/919561611052" target="_blank" rel="noreferrer" aria-label="WhatsApp">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 2a10 10 0 0 0-8.7 14.9L2 22l5.2-1.3A10 10 0 1 0 12 2z" /><path d="M8.5 8.2c.2-.5.4-.5.7-.5h.5c.2 0 .4 0 .6.5l.7 1.6c.1.2.1.4 0 .5l-.4.5c-.1.2-.3.3-.1.6a6 6 0 0 0 2.9 2.5c.3.1.4 0 .6-.2l.4-.5c.2-.2.3-.2.6-.1l1.5.8c.2.1.3.2.3.4v.6c0 .3-.3.6-.5.7a3 3 0 0 1-2.3 0 8 8 0 0 1-4.3-4 3 3 0 0 1-.3-2.4z" fill="currentColor" stroke="none" /></svg>
+            </a>
+            <a href="mailto:cozyhavenstudio9@gmail.com" aria-label="Email">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="2" y="4" width="20" height="16" rx="2" /><path d="M2 6l10 7 10-7" /></svg>
+            </a>
+            <a href="tel:+919561611052" aria-label="Phone">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z" /></svg>
+            </a>
           </div>
         </div>
       </footer>
@@ -570,6 +591,14 @@ export default function App() {
               <a className="button line" href="https://wa.me/919561611052" target="_blank" rel="noreferrer">WhatsApp Us</a>
             </div>
           </div>
+        </div>
+      )}
+
+      {/* IMAGE LIGHTBOX */}
+      {lightboxImage && (
+        <div className="lightbox-overlay" onClick={() => setLightboxImage(null)}>
+          <button className="lightbox-close" onClick={() => setLightboxImage(null)} aria-label="Close">✕</button>
+          <img src={lightboxImage} alt="" className="lightbox-image" onClick={(e) => e.stopPropagation()} />
         </div>
       )}
     </div>
