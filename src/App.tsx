@@ -235,6 +235,10 @@ export default function App() {
 
         {/* ABOUT */}
         <section id="studio" className="about section" ref={aboutReveal.ref}>
+          <div className={`about-heading ${aboutReveal.visible ? 'is-visible' : ''}`}>
+            <p className="eyebrow">01 · ABOUT THE STUDIO</p>
+            <h2>Thoughtful spaces,<br /><em>made to last.</em></h2>
+          </div>
           <div className={`about-visual ${aboutReveal.visible ? 'is-visible' : ''}`}>
             <div className="about-image-main">
               <img src="/aboutus-main.jpeg" alt="Cozyhaven Studio interior project" loading="lazy" />
@@ -245,8 +249,6 @@ export default function App() {
             <div className="about-image-label">The Studio</div>
           </div>
           <div className={`about-copy ${aboutReveal.visible ? 'is-visible' : ''}`}>
-            <p className="eyebrow">01 · ABOUT THE STUDIO</p>
-            <h2>Thoughtful spaces,<br /><em>made to last.</em></h2>
             <div className="rule" />
             <p>CozyHaven Studio is a design and execution studio creating thoughtful spaces that blend aesthetics, functionality, and craftsmanship.</p>
             <p>From architectural exteriors and refined interiors to customized furniture and complete design execution, we bring every detail together with precision. Our team of skilled architects, designers, engineers, craftsmen and project experts transforms ideas into modern, functional, and inspiring spaces — crafted to reflect the people who live and work in them.</p>
@@ -330,6 +332,10 @@ export default function App() {
 
         {/* FOUNDERS */}
         <section className="founder section" ref={founderReveal.ref}>
+          <div className={`founder-heading ${founderReveal.visible ? 'is-visible' : ''}`}>
+            <p className="eyebrow">03 · MEET THE FOUNDERS</p>
+            <h2>The hands behind<br /><em>CozyHaven Studio.</em></h2>
+          </div>
           <div className={`founder-photo ${founderReveal.visible ? 'is-visible' : ''}`}>
             <img src="/founder.jpeg" alt="Shatrughan Sharma, founder of CozyHaven Studio" loading="lazy" />
             <div className="founder-photo-label">
@@ -339,8 +345,6 @@ export default function App() {
             <div className="founder-photo-num">01</div>
           </div>
           <div className={`founder-copy ${founderReveal.visible ? 'is-visible' : ''}`}>
-            <p className="eyebrow">03 · MEET THE FOUNDERS</p>
-            <h2>The hands behind<br /><em>CozyHaven Studio.</em></h2>
             <div className="founder-profile founder-profile-primary">
               <span className="founder-profile-num">01</span>
               <h3>Shatrughan Sharma</h3>
@@ -530,7 +534,6 @@ export default function App() {
 
       {/* FOOTER */}
       <footer className="site-footer">
-        <div className="footer-wordmark">COZYHAVEN</div>
         <div className="footer-content">
           <div className="footer-grid">
             <div className="footer-brand">
@@ -545,35 +548,33 @@ export default function App() {
               <a href="#work" onClick={(e) => { e.preventDefault(); scrollTo('work') }}>Projects</a>
               <a href="#contact" onClick={(e) => { e.preventDefault(); scrollTo('contact') }}>Contact</a>
             </div>
-            <div className="footer-links">
-              <a href="https://www.instagram.com/cozyhavenstudio?igsi=cjR5dm5udnBjN3o=" target="_blank" rel="noreferrer">Instagram ↗</a>
-              <a href="https://youtube.com/@cozyhavenstudio?si=mwLGt4kNMWMq-wgA" target="_blank" rel="noreferrer">YouTube ↗</a>
-              <a href="https://wa.me/919561611052" target="_blank" rel="noreferrer">WhatsApp ↗</a>
-              <a href="mailto:cozyhavenstudio9@gmail.com">Email ↗</a>
-              <a href="tel:+919561611052">+91 9561611052</a>
+            <div className="footer-links footer-social-links">
+              <a href="https://www.instagram.com/cozyhavenstudio?igsi=cjR5dm5udnBjN3o=" target="_blank" rel="noreferrer">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="2" y="2" width="20" height="20" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" /></svg>
+                Instagram ↗
+              </a>
+              <a href="https://youtube.com/@cozyhavenstudio?si=mwLGt4kNMWMq-wgA" target="_blank" rel="noreferrer">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M22 8.5a3 3 0 0 0-2.1-2.1C18 6 12 6 12 6s-6 0-7.9.4A3 3 0 0 0 2 8.5 31 31 0 0 0 1.7 12 31 31 0 0 0 2 15.5a3 3 0 0 0 2.1 2.1C6 18 12 18 12 18s6 0 7.9-.4A3 3 0 0 0 22 15.5 31 31 0 0 0 22.3 12 31 31 0 0 0 22 8.5z" /><path d="M10 9l5 3-5 3z" fill="currentColor" stroke="none" /></svg>
+                YouTube ↗
+              </a>
+              <a href="https://wa.me/919561611052" target="_blank" rel="noreferrer">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 2a10 10 0 0 0-8.7 14.9L2 22l5.2-1.3A10 10 0 1 0 12 2z" /><path d="M8.5 8.2c.2-.5.4-.5.7-.5h.5c.2 0 .4 0 .6.5l.7 1.6c.1.2.1.4 0 .5l-.4.5c-.1.2-.3.3-.1.6a6 6 0 0 0 2.9 2.5c.3.1.4 0 .6-.2l.4-.5c.2-.2.3-.2.6-.1l1.5.8c.2.1.3.2.3.4v.6c0 .3-.3.6-.5.7a3 3 0 0 1-2.3 0 8 8 0 0 1-4.3-4 3 3 0 0 1-.3-2.4z" fill="currentColor" stroke="none" /></svg>
+                WhatsApp ↗
+              </a>
+              <a href="mailto:cozyhavenstudio9@gmail.com">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="2" y="4" width="20" height="16" rx="2" /><path d="M2 6l10 7 10-7" /></svg>
+                Email ↗
+              </a>
+              <a href="tel:+919561611052">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z" /></svg>
+                +91 9561611052 ↗
+              </a>
             </div>
           </div>
           <div className="footer-divider" />
           <div className="footer-bottom">
             <span>© 2026 CozyHaven Studio. All rights reserved.</span>
             <span>Crafting Space. Creating Dreams.</span>
-          </div>
-          <div className="footer-social">
-            <a href="https://www.instagram.com/cozyhavenstudio?igsi=cjR5dm5udnBjN3o=" target="_blank" rel="noreferrer" aria-label="Instagram">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="2" y="2" width="20" height="20" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" /></svg>
-            </a>
-            <a href="https://youtube.com/@cozyhavenstudio?si=mwLGt4kNMWMq-wgA" target="_blank" rel="noreferrer" aria-label="YouTube">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M22 8.5a3 3 0 0 0-2.1-2.1C18 6 12 6 12 6s-6 0-7.9.4A3 3 0 0 0 2 8.5 31 31 0 0 0 1.7 12 31 31 0 0 0 2 15.5a3 3 0 0 0 2.1 2.1C6 18 12 18 12 18s6 0 7.9-.4A3 3 0 0 0 22 15.5 31 31 0 0 0 22.3 12 31 31 0 0 0 22 8.5z" /><path d="M10 9l5 3-5 3z" fill="currentColor" stroke="none" /></svg>
-            </a>
-            <a href="https://wa.me/919561611052" target="_blank" rel="noreferrer" aria-label="WhatsApp">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 2a10 10 0 0 0-8.7 14.9L2 22l5.2-1.3A10 10 0 1 0 12 2z" /><path d="M8.5 8.2c.2-.5.4-.5.7-.5h.5c.2 0 .4 0 .6.5l.7 1.6c.1.2.1.4 0 .5l-.4.5c-.1.2-.3.3-.1.6a6 6 0 0 0 2.9 2.5c.3.1.4 0 .6-.2l.4-.5c.2-.2.3-.2.6-.1l1.5.8c.2.1.3.2.3.4v.6c0 .3-.3.6-.5.7a3 3 0 0 1-2.3 0 8 8 0 0 1-4.3-4 3 3 0 0 1-.3-2.4z" fill="currentColor" stroke="none" /></svg>
-            </a>
-            <a href="mailto:cozyhavenstudio9@gmail.com" aria-label="Email">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="2" y="4" width="20" height="16" rx="2" /><path d="M2 6l10 7 10-7" /></svg>
-            </a>
-            <a href="tel:+919561611052" aria-label="Phone">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z" /></svg>
-            </a>
           </div>
         </div>
       </footer>
