@@ -81,11 +81,7 @@ const machines = [
   { num: '04', name: 'PVC Edge Banding Machine', desc: 'Clean, durable edges for a refined finish.', image: '/pvc-edge-banding-machine.jpeg' },
 ]
 
-const journalImages = [
-  '/journal1.jpeg', '/journal2.jpeg', '/journal3.jpeg', '/journal4.jpeg',
-  '/journal5.jpeg', '/journal6.jpeg', '/journal7.jpeg', '/journal8.jpeg',
-  '/journal9.jpeg', '/journal10.jpeg', '/journal11.jpeg', '/journal12.jpeg',
-]
+const journalImages = Array.from({ length: 36 }, (_, i) => `/journal${i + 1}.jpeg`)
 
 function RevealText({ children, className = '', delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
   const { ref, visible } = useReveal<HTMLDivElement>(0.2)
@@ -123,11 +119,13 @@ export default function App() {
   const [dragging, setDragging] = useState(false)
   const [cursorOver, setCursorOver] = useState(false)
   const [lightboxImage, setLightboxImage] = useState<string | null>(null)
+  const [activeJournal, setActiveJournal] = useState(0)
 
   const dragStartX = useRef(0)
   const dragDelta = useRef(0)
   const projectImageRef = useRef<HTMLDivElement>(null)
   const heroBgRef = useRef<HTMLDivElement>(null)
+  const journalCarouselRef = useRef<HTMLDivElement>(null)
 
   const aboutReveal = useReveal<HTMLDivElement>(0.15)
   const servicesReveal = useReveal<HTMLDivElement>(0.1)
@@ -192,6 +190,37 @@ export default function App() {
     setFormOpen(false)
     setTimeout(() => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' }), 50)
   }
+
+  const journalScroll = useCallback((dir: number) => {
+    const container = journalCarouselRef.current
+    if (!container) return
+    const slides = Array.from(container.querySelectorAll('.journal-carousel-slide')) as HTMLElement[]
+    if (!slides.length) return
+    const containerCenter = container.scrollLeft + container.offsetWidth / 2
+    let currentIdx = 0
+    slides.forEach((el, i) => {
+      if (el.offsetLeft + el.offsetWidth / 2 <= containerCenter) currentIdx = i
+    })
+    const nextIdx = Math.max(0, Math.min(slides.length - 1, currentIdx + dir))
+    const target = slides[nextIdx]
+    const scrollTarget = target.offsetLeft - (container.offsetWidth - target.offsetWidth) / 2
+    container.scrollTo({ left: scrollTarget, behavior: 'smooth' })
+  }, [])
+
+  const onJournalScroll = useCallback(() => {
+    const container = journalCarouselRef.current
+    if (!container) return
+    const slides = Array.from(container.querySelectorAll('.journal-carousel-slide')) as HTMLElement[]
+    if (!slides.length) return
+    const containerCenter = container.scrollLeft + container.offsetWidth / 2
+    let closestIdx = 0
+    let closestDist = Infinity
+    slides.forEach((el, i) => {
+      const dist = Math.abs(el.offsetLeft + el.offsetWidth / 2 - containerCenter)
+      if (dist < closestDist) { closestDist = dist; closestIdx = i }
+    })
+    setActiveJournal(closestIdx)
+  }, [])
 
   return (
     <div className="site-shell">
@@ -297,7 +326,7 @@ export default function App() {
                           <span key={item} className="service-tag">{item}</span>
                         ))}
                       </div>
-                      <div className="service-gallery">
+                      <div className={`service-gallery ${service.images.length === 2 ? 'service-gallery-stacked' : ''}`}>
                         <div className="service-gallery-feature" onClick={(e) => { e.stopPropagation(); setLightboxImage(service.images[0].src) }}>
                           <img src={service.images[0].src} alt={service.images[0].label} loading="lazy" />
                         </div>
@@ -485,12 +514,17 @@ export default function App() {
             <p className="eyebrow">07 · THE JOURNAL</p>
             <h2>Moments in<br /><em>the making.</em></h2>
             <p className="journal-handle">@cozyhavenstudio</p>
-            <div className="journal-gallery">
-              {journalImages.map((img, index) => (
-                <div className="journal-gallery-item" key={index} onClick={() => setLightboxImage(img)}>
-                  <img src={img} alt={`Journal ${index + 1}`} loading="lazy" />
-                </div>
-              ))}
+            <div className="journal-carousel" ref={journalCarouselRef}>
+              <div className="journal-carousel-track" onScroll={onJournalScroll}>
+                {journalImages.map((img, index) => (
+                  <div className="journal-carousel-slide" key={index} onClick={() => setLightboxImage(img)}>
+                    <img src={img} alt={`Journal ${index + 1}`} loading="lazy" />
+                  </div>
+                ))}
+              </div>
+              <button className="journal-nav journal-nav-prev" onClick={() => journalScroll(-1)} aria-label="Previous journal image">←</button>
+              <button className="journal-nav journal-nav-next" onClick={() => journalScroll(1)} aria-label="Next journal image">→</button>
+              <div className="journal-counter"><span>{String(activeJournal + 1).padStart(2, '0')}</span><i /><span>{String(journalImages.length).padStart(2, '0')}</span></div>
             </div>
           </div>
         </section>

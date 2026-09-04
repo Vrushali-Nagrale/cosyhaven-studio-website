@@ -276,6 +276,9 @@ h2 em { font: 300 italic 1.05em var(--serif); color: var(--gold); }
   opacity: 0; transform: translateY(16px);
   transition: opacity 0.6s var(--ease) 0.25s, transform 0.6s var(--ease) 0.25s;
 }
+.service-gallery-stacked { grid-template-columns: 1fr; gap: 16px; }
+.service-gallery-stacked .service-gallery-grid { grid-template-columns: 1fr; }
+.service-gallery-stacked .service-gallery-item { aspect-ratio: 16/10; }
 .service-row.is-open .service-gallery { opacity: 1; transform: translateY(0); }
 .service-gallery-feature, .service-gallery-item {
   position: relative; overflow: hidden; background: var(--panel); cursor: pointer;
@@ -515,19 +518,55 @@ h2 em { font: 300 italic 1.05em var(--serif); color: var(--gold); }
   margin-bottom: 56px;
 }
 .journal-gallery {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+  display: none;
 }
-.journal-gallery-item {
-  overflow: hidden; cursor: pointer; aspect-ratio: 4/5;
-  opacity: 0; transform: translateY(30px);
-  transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+.journal-carousel {
+  position: relative; overflow: hidden;
 }
-.journal-inner.is-visible .journal-gallery-item { opacity: 1; transform: translateY(0); }
-.journal-gallery-item img {
+.journal-carousel-track {
+  display: flex; gap: 20px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding: 0 7vw;
+  touch-action: pan-x;
+}
+.journal-carousel-track::-webkit-scrollbar { display: none; }
+.journal-carousel-slide {
+  flex: 0 0 80%;
+  scroll-snap-align: center;
+  overflow: hidden; cursor: pointer;
+  aspect-ratio: 4/5;
+  position: relative;
+  background: var(--panel);
+}
+.journal-carousel-slide img {
   width: 100%; height: 100%; object-fit: cover;
-  filter: brightness(0.85); transition: filter 0.5s, transform 0.7s var(--ease-expo);
+  filter: brightness(0.85);
+  transition: filter 0.5s, transform 0.7s var(--ease-expo);
+  pointer-events: none;
 }
-.journal-gallery-item:hover img { filter: brightness(1); transform: scale(1.04); }
+.journal-carousel-slide:hover img { filter: brightness(1); transform: scale(1.04); }
+.journal-nav {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 44px; height: 44px; border: 1px solid var(--line);
+  background: rgba(11,10,9,0.7); backdrop-filter: blur(4px);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; color: var(--ivory); cursor: pointer;
+  transition: all 0.3s var(--ease); z-index: 5;
+}
+.journal-nav:hover { border-color: var(--gold); color: var(--gold-bright); }
+.journal-nav-prev { left: 1.5vw; }
+.journal-nav-next { right: 1.5vw; }
+.journal-counter {
+  position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%);
+  display: flex; align-items: center; gap: 12px;
+  font-size: 11px; letter-spacing: 0.15em; color: var(--ivory);
+  z-index: 5; pointer-events: none;
+}
+.journal-counter i { width: 28px; height: 1px; background: var(--gold); }
 
 /* ── MANUFACTURING ── */
 .manufacturing { display: grid; grid-template-columns: 0.65fr 1.35fr; gap: 8vw; background: var(--dark); align-items: start; }
@@ -702,7 +741,8 @@ select { cursor: pointer; }
   .more-projects { padding: 80px 24px; }
   .more-projects-list { grid-template-columns: 1fr 1fr; }
   .journal { padding: 90px 24px; }
-  .journal-gallery { gap: 16px; }
+  .journal-carousel-slide { flex-basis: 88%; }
+  .journal-carousel-track { padding: 0 6vw; }
   .residential-scale { padding: 80px 24px; }
   .residential-scale-locations { font-size: 10px; letter-spacing: 0.12em; gap: 4px 8px; }
   .machine-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
@@ -742,7 +782,11 @@ select { cursor: pointer; }
   .project-image img.is-active { transform: scale(1); }
   .machine-grid { grid-template-columns: 1fr; }
   .more-projects-list { grid-template-columns: 1fr; }
-  .journal-gallery { grid-template-columns: 1fr; }
+  .journal-carousel-slide { flex-basis: 85%; }
+  .journal-carousel-track { padding: 0 5vw; gap: 12px; }
+  .journal-nav { width: 38px; height: 38px; font-size: 14px; }
+  .journal-nav-prev { left: 8px; }
+  .journal-nav-next { right: 8px; }
   .contact-grid { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr; gap: 30px; }
 }
